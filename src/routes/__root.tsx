@@ -88,6 +88,12 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { property: "og:type", content: "website" },
       { property: "og:site_name", content: "QRFUSE" },
       { name: "twitter:card", content: "summary_large_image" },
+      { property: "og:title", content: "QRFUSE – Free QR Code Generator" },
+      { name: "twitter:title", content: "QRFUSE – Free QR Code Generator" },
+      { property: "og:description", content: "Generate QR codes instantly for URLs, text, Wi-Fi, email, phone numbers, and SMS. Fast, free, secure, and mobile-friendly." },
+      { name: "twitter:description", content: "Generate QR codes instantly for URLs, text, Wi-Fi, email, phone numbers, and SMS. Fast, free, secure, and mobile-friendly." },
+      { property: "og:image", content: "https://storage.googleapis.com/gpt-engineer-file-uploads/lENX7TPKF3YtwcBEBseO9J9yxlM2/social-images/social-1785081350094-1000090114.webp" },
+      { name: "twitter:image", content: "https://storage.googleapis.com/gpt-engineer-file-uploads/lENX7TPKF3YtwcBEBseO9J9yxlM2/social-images/social-1785081350094-1000090114.webp" },
     ],
     links: [
       {

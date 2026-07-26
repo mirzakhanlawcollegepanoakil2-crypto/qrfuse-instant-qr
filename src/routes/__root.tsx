@@ -123,6 +123,19 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
           offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },
         }),
       },
+      // Google Analytics
+      {
+        async: true,
+        src: "https://www.googletagmanager.com/gtag/js?id=G-97JDYP2CCE",
+      },
+      {
+        children: `
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-97JDYP2CCE');
+        `,
+      },
     ],
   }),
   shellComponent: RootShell,

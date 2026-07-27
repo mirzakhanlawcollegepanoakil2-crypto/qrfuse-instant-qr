@@ -9,7 +9,8 @@ import {
 const BLOG_DESCRIPTION =
   "Explore QR code tips, tutorials, and guides to help you make the most of QR codes in your business and personal projects.";
 
-export const Route = createFileRoute("/blog/")({\n  head: () => ({
+export const Route = createFileRoute("/blog/")({
+  head: () => ({
     meta: [
       { title: "QR Code Blog - Tips, Guides & Tutorials | QRFUSE" },
       { name: "description", content: BLOG_DESCRIPTION },
@@ -17,17 +18,17 @@ export const Route = createFileRoute("/blog/")({\n  head: () => ({
       ...generateOGTags({
         title: "QR Code Blog - Tips, Guides & Tutorials | QRFUSE",
         description: BLOG_DESCRIPTION,
-        url: "https://qrfuse.vercel.app/blog",
+        url: "https://qrfuse-instant-qr.lovable.app/blog",
         type: "website",
       }),
       ...generateTwitterTags({
         title: "QR Code Blog - Tips, Guides & Tutorials | QRFUSE",
         description: BLOG_DESCRIPTION,
-        url: "https://qrfuse.vercel.app/blog",
+        url: "https://qrfuse-instant-qr.lovable.app/blog",
       }),
     ],
     links: [
-      { rel: "canonical", href: "https://qrfuse.vercel.app/blog" },
+      { rel: "canonical", href: "https://qrfuse-instant-qr.lovable.app/blog" },
     ],
     scripts: [
       {

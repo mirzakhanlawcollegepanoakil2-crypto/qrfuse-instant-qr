@@ -65,7 +65,7 @@ export function generateArticleSchema(config: SEOConfig) {
       name: "QRFUSE",
       logo: {
         "@type": "ImageObject",
-        url: "https://qrfuse.vercel.app/favicon.png",
+        url: "https://qrfuse-instant-qr.lovable.app/favicon.png",
       },
     },
     datePublished: config.publishedDate,
@@ -92,7 +92,7 @@ export function generateBlogPostingSchema(config: SEOConfig) {
       name: "QRFUSE",
       logo: {
         "@type": "ImageObject",
-        url: "https://qrfuse.vercel.app/favicon.png",
+        url: "https://qrfuse-instant-qr.lovable.app/favicon.png",
       },
     },
     datePublished: config.publishedDate,
@@ -108,13 +108,8 @@ export function generateOrganizationSchema() {
     "@context": "https://schema.org",
     "@type": "Organization",
     name: "QRFUSE",
-    url: "https://qrfuse.vercel.app",
-    logo: "https://qrfuse.vercel.app/favicon.png",
-    sameAs: [
-      "https://www.facebook.com/qrfuse",
-      "https://www.twitter.com/qrfuse",
-      "https://www.linkedin.com/company/qrfuse",
-    ],
+    url: "https://qrfuse-instant-qr.lovable.app",
+    logo: "https://qrfuse-instant-qr.lovable.app/favicon.png",
     description:
       "Generate QR codes instantly for URLs, text, Wi-Fi, email, phone numbers, and SMS.",
   };

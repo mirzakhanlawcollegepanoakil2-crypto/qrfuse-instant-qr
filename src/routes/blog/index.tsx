@@ -51,6 +51,29 @@ function BlogIndex() {
           <p className="mx-auto mt-4 max-w-2xl text-base leading-relaxed text-muted-foreground sm:text-lg">
             Learn everything about QR codes, from basics to advanced strategies. Get tips, tutorials, and best practices.
           </p>
+          <a
+            href="/rss.xml"
+            className="mt-6 inline-flex items-center gap-2 text-sm font-medium text-primary hover:text-primary/80"
+            aria-label="Subscribe to the QRFUSE blog RSS feed"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="16"
+              height="16"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              aria-hidden="true"
+            >
+              <path d="M4 11a9 9 0 0 1 9 9" />
+              <path d="M4 4a16 16 0 0 1 16 16" />
+              <circle cx="5" cy="19" r="1" />
+            </svg>
+            Subscribe via RSS
+          </a>
         </div>
         <BlogGrid />
       </div>

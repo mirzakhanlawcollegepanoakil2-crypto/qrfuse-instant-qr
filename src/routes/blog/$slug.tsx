@@ -37,7 +37,7 @@ export const Route = createFileRoute("/blog/$slug")({
         ...generateOGTags({
           title: post.title,
           description: post.description,
-          url: `https://qrfuse-instant-qr.lovable.app/blog/${post.slug}`,
+          url: `https://qrfuse.vercel.app/blog/${post.slug}`,
           image: post.image,
           imageAlt: post.imageAlt,
           type: "article",
@@ -45,12 +45,12 @@ export const Route = createFileRoute("/blog/$slug")({
         ...generateTwitterTags({
           title: post.title,
           description: post.description,
-          url: `https://qrfuse-instant-qr.lovable.app/blog/${post.slug}`,
+          url: `https://qrfuse.vercel.app/blog/${post.slug}`,
           image: post.image,
         }),
       ],
       links: [
-        { rel: "canonical", href: `https://qrfuse-instant-qr.lovable.app/blog/${post.slug}` },
+        { rel: "canonical", href: `https://qrfuse.vercel.app/blog/${post.slug}` },
       ],
       scripts: [
         {
@@ -59,7 +59,7 @@ export const Route = createFileRoute("/blog/$slug")({
             generateBlogPostingSchema({
               title: post.title,
               description: post.description,
-              url: `https://qrfuse-instant-qr.lovable.app/blog/${post.slug}`,
+              url: `https://qrfuse.vercel.app/blog/${post.slug}`,
               image: post.image,
               imageAlt: post.imageAlt,
               author: post.author,

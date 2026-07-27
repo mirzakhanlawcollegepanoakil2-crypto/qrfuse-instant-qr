@@ -18,17 +18,17 @@ export const Route = createFileRoute("/blog/")({
       ...generateOGTags({
         title: "QR Code Blog - Tips, Guides & Tutorials | QRFUSE",
         description: BLOG_DESCRIPTION,
-        url: "https://qrfuse-instant-qr.lovable.app/blog",
+        url: "https://qrfuse.vercel.app/blog",
         type: "website",
       }),
       ...generateTwitterTags({
         title: "QR Code Blog - Tips, Guides & Tutorials | QRFUSE",
         description: BLOG_DESCRIPTION,
-        url: "https://qrfuse-instant-qr.lovable.app/blog",
+        url: "https://qrfuse.vercel.app/blog",
       }),
     ],
     links: [
-      { rel: "canonical", href: "https://qrfuse-instant-qr.lovable.app/blog" },
+      { rel: "canonical", href: "https://qrfuse.vercel.app/blog" },
     ],
     scripts: [
       {

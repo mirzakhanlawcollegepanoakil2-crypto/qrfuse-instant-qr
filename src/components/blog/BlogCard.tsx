@@ -10,7 +10,7 @@ interface BlogCardProps {
 
 export function BlogCard({ post }: BlogCardProps) {
   return (
-    <Link to={`/blog/${post.slug}`}>
+    <Link to="/blog/$slug" params={{ slug: post.slug }}>
       <Card className="overflow-hidden transition-all hover:shadow-lg hover:scale-105 cursor-pointer h-full">
         <div className="relative aspect-video overflow-hidden bg-muted">
           <img

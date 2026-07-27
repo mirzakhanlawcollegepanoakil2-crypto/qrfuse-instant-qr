@@ -11,6 +11,9 @@ export function Footer() {
           <p className="mt-1 text-sm text-muted-foreground">Create QR codes instantly.</p>
         </div>
         <nav aria-label="Footer" className="flex flex-wrap gap-x-6 gap-y-2 text-sm">
+          <Link to="/blog" className="text-muted-foreground transition-colors hover:text-primary">
+            Blog
+          </Link>
           <Link to="/privacy" className="text-muted-foreground transition-colors hover:text-primary">
             Privacy Policy
           </Link>

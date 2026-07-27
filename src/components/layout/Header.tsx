@@ -16,6 +16,15 @@ export function Header() {
             QR<span className="text-primary">FUSE</span>
           </span>
         </Link>
+        <nav aria-label="Main" className="ml-auto flex items-center gap-6 text-sm font-medium">
+          <Link
+            to="/blog"
+            className="text-muted-foreground transition-colors hover:text-primary"
+            activeProps={{ className: "text-primary" }}
+          >
+            Blog
+          </Link>
+        </nav>
       </div>
     </header>
   );

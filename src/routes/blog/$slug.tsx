@@ -1,4 +1,4 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, notFound } from "@tanstack/react-router";
 import { Link } from "@tanstack/react-router";
 import { getBlogPostBySlug, getAllBlogPosts, formatBlogDate } from "@/lib/blog";
 import {
@@ -10,15 +10,21 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { ArrowLeft } from "lucide-react";
 
-export const Route = createFileRoute("/blog/$slug")({\n  beforeLoad: async ({ params }) => {
+export const Route = createFileRoute("/blog/$slug")({
+  loader: ({ params }) => {
     const post = getBlogPostBySlug(params.slug);
     if (!post) {
-      throw new Error("Post not found");
+      throw notFound();
     }
     return { post };
   },
-  head: ({ context }) => {
-    const post = context.post;
+  head: ({ loaderData }) => {
+    if (!loaderData) {
+      return {
+        meta: [{ title: "Article not found | QRFUSE Blog" }, { name: "robots", content: "noindex" }],
+      };
+    }
+    const post = loaderData.post;
     return {
       meta: [
         { title: `${post.title} | QRFUSE Blog` },
@@ -31,7 +37,7 @@ export const Route = createFileRoute("/blog/$slug")({\n  beforeLoad: async ({ pa
         ...generateOGTags({
           title: post.title,
           description: post.description,
-          url: `https://qrfuse.vercel.app/blog/${post.slug}`,
+          url: `https://qrfuse-instant-qr.lovable.app/blog/${post.slug}`,
           image: post.image,
           imageAlt: post.imageAlt,
           type: "article",
@@ -39,12 +45,12 @@ export const Route = createFileRoute("/blog/$slug")({\n  beforeLoad: async ({ pa
         ...generateTwitterTags({
           title: post.title,
           description: post.description,
-          url: `https://qrfuse.vercel.app/blog/${post.slug}`,
+          url: `https://qrfuse-instant-qr.lovable.app/blog/${post.slug}`,
           image: post.image,
         }),
       ],
       links: [
-        { rel: "canonical", href: `https://qrfuse.vercel.app/blog/${post.slug}` },
+        { rel: "canonical", href: `https://qrfuse-instant-qr.lovable.app/blog/${post.slug}` },
       ],
       scripts: [
         {
@@ -53,7 +59,7 @@ export const Route = createFileRoute("/blog/$slug")({\n  beforeLoad: async ({ pa
             generateBlogPostingSchema({
               title: post.title,
               description: post.description,
-              url: `https://qrfuse.vercel.app/blog/${post.slug}`,
+              url: `https://qrfuse-instant-qr.lovable.app/blog/${post.slug}`,
               image: post.image,
               imageAlt: post.imageAlt,
               author: post.author,
@@ -68,7 +74,7 @@ export const Route = createFileRoute("/blog/$slug")({\n  beforeLoad: async ({ pa
 });
 
 function BlogPostPage() {
-  const { post } = Route.useContext();
+  const { post } = Route.useLoaderData();
   const allPosts = getAllBlogPosts();
   const currentIndex = allPosts.findIndex((p) => p.slug === post.slug);
   const previousPost = allPosts[currentIndex + 1];
@@ -116,7 +122,7 @@ function BlogPostPage() {
       {/* Content */}
       <div className="mx-auto max-w-3xl px-5 py-8 pb-16">
         <div className="prose prose-sm dark:prose-invert max-w-none">
-          {post.content.split('\n').map((paragraph, index) => {
+          {post.content.split("\n").map((paragraph: string, index: number) => {
             if (paragraph.startsWith('#')) {
               const level = paragraph.match(/^#+/)![0].length;
               const text = paragraph.replace(/^#+\s/, '');
@@ -160,7 +166,7 @@ function BlogPostPage() {
         <div className="mx-auto max-w-3xl px-5 py-12">
           <div className="grid gap-6 sm:grid-cols-2">
             {previousPost ? (
-              <Link to={`/blog/${previousPost.slug}`}>
+              <Link to="/blog/$slug" params={{ slug: previousPost.slug }}>
                 <div className="group cursor-pointer">
                   <p className="mb-2 text-sm font-semibold text-primary">
                     ← Previous Post
@@ -174,7 +180,7 @@ function BlogPostPage() {
               <div />
             )}
             {nextPost ? (
-              <Link to={`/blog/${nextPost.slug}`}>
+              <Link to="/blog/$slug" params={{ slug: nextPost.slug }}>
                 <div className="group cursor-pointer text-right">
                   <p className="mb-2 text-sm font-semibold text-primary">
                     Next Post →

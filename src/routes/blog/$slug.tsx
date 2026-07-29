@@ -87,7 +87,7 @@ export const Route = createFileRoute("/blog/$slug")({
 
 function BlogPostPage() {
   const { post, allPosts } = Route.useLoaderData();
-  const currentIndex = allPosts.findIndex((p) => p.slug === post.slug);
+  const currentIndex = allPosts.findIndex((p: { slug: string }) => p.slug === post.slug);
   const previousPost = allPosts[currentIndex + 1];
   const nextPost = allPosts[currentIndex - 1];
 

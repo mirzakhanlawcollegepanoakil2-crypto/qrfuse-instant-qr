@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import type {} from "@tanstack/react-start";
-import { getAllBlogPosts } from "@/lib/blog";
+import type { BlogPost } from "@/lib/blog";
 
 const SITE_URL = "https://qrfuse.vercel.app";
 
@@ -11,7 +11,7 @@ interface SitemapEntry {
   priority: string;
 }
 
-function generateSitemapXml() {
+function generateSitemapXml(posts: BlogPost[]) {
   const staticPages: SitemapEntry[] = [
     { path: "/", changefreq: "weekly", priority: "1.0" },
     { path: "/blog", changefreq: "weekly", priority: "0.9" },
@@ -20,7 +20,7 @@ function generateSitemapXml() {
     { path: "/contact", changefreq: "monthly", priority: "0.6" },
   ];
 
-  const blogEntries: SitemapEntry[] = getAllBlogPosts().map((post) => ({
+  const blogEntries: SitemapEntry[] = posts.map((post) => ({
     path: `/blog/${post.slug}`,
     changefreq: "monthly",
     priority: "0.8",
@@ -51,13 +51,15 @@ function generateSitemapXml() {
 export const Route = createFileRoute("/sitemap.xml")({
   server: {
     handlers: {
-      GET: async () =>
-        new Response(generateSitemapXml(), {
+      GET: async () => {
+        const { listPublishedPosts } = await import("@/lib/blog-public.server");
+        return new Response(generateSitemapXml(await listPublishedPosts()), {
           headers: {
             "Content-Type": "application/xml",
-            "Cache-Control": "public, max-age=3600",
+            "Cache-Control": "public, max-age=300",
           },
-        }),
+        });
+      },
     },
   },
 });

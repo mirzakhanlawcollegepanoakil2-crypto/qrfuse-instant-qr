@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import type {} from "@tanstack/react-start";
-import { getAllBlogPosts } from "@/lib/blog";
+import type { BlogPost } from "@/lib/blog";
 
 const SITE_URL = "https://qrfuse.vercel.app";
 const SITE_TITLE = "QRFUSE Blog";
@@ -21,8 +21,7 @@ function toRfc822Date(dateString: string): string {
   return date.toUTCString();
 }
 
-function generateRssXml(): string {
-  const posts = getAllBlogPosts();
+function generateRssXml(posts: BlogPost[]): string {
   const lastBuildDate = posts.length > 0 ? toRfc822Date(posts[0].date) : toRfc822Date(new Date().toISOString());
 
   const items = posts
@@ -73,13 +72,15 @@ function generateRssXml(): string {
 export const Route = createFileRoute("/rss.xml")({
   server: {
     handlers: {
-      GET: async () =>
-        new Response(generateRssXml(), {
+      GET: async () => {
+        const { listPublishedPosts } = await import("@/lib/blog-public.server");
+        return new Response(generateRssXml(await listPublishedPosts()), {
           headers: {
             "Content-Type": "application/rss+xml; charset=utf-8",
-            "Cache-Control": "public, max-age=3600",
+            "Cache-Control": "public, max-age=300",
           },
-        }),
+        });
+      },
     },
   },
 });

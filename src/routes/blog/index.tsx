@@ -1,5 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { BlogGrid } from "@/components/blog/BlogGrid";
+import { fetchPublishedPosts } from "@/lib/blog-public.functions";
 import {
   generateOGTags,
   generateTwitterTags,
@@ -10,6 +11,15 @@ const BLOG_DESCRIPTION =
   "Explore QR code tips, tutorials, and guides to help you make the most of QR codes in your business and personal projects.";
 
 export const Route = createFileRoute("/blog/")({
+  loader: () => fetchPublishedPosts(),
+  errorComponent: () => (
+    <div className="p-16 text-center text-sm text-muted-foreground">
+      We couldn't load the blog right now. Please refresh.
+    </div>
+  ),
+  notFoundComponent: () => (
+    <div className="p-16 text-center text-sm text-muted-foreground">Nothing here yet.</div>
+  ),
   head: () => ({
     meta: [
       { title: "QR Code Blog - Tips, Guides & Tutorials | QRFUSE" },
@@ -41,6 +51,7 @@ export const Route = createFileRoute("/blog/")({
 });
 
 function BlogIndex() {
+  const posts = Route.useLoaderData();
   return (
     <div className="min-h-screen bg-background">
       <div className="mx-auto max-w-6xl px-5 py-16 sm:py-24">
@@ -75,7 +86,7 @@ function BlogIndex() {
             Subscribe via RSS
           </a>
         </div>
-        <BlogGrid />
+        <BlogGrid posts={posts} />
       </div>
     </div>
   );

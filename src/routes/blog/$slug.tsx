@@ -1,6 +1,7 @@
 import { createFileRoute, notFound } from "@tanstack/react-router";
 import { Link } from "@tanstack/react-router";
-import { getBlogPostBySlug, getAllBlogPosts, formatBlogDate } from "@/lib/blog";
+import { formatBlogDate } from "@/lib/blog";
+import { fetchPublishedPost, fetchPublishedPosts } from "@/lib/blog-public.functions";
 import {
   generateOGTags,
   generateTwitterTags,
@@ -11,13 +12,24 @@ import { Button } from "@/components/ui/button";
 import { ArrowLeft } from "lucide-react";
 
 export const Route = createFileRoute("/blog/$slug")({
-  loader: ({ params }) => {
-    const post = getBlogPostBySlug(params.slug);
+  loader: async ({ params }) => {
+    const [post, allPosts] = await Promise.all([
+      fetchPublishedPost({ data: { slug: params.slug } }),
+      fetchPublishedPosts(),
+    ]);
     if (!post) {
       throw notFound();
     }
-    return { post };
+    return { post, allPosts };
   },
+  errorComponent: () => (
+    <div className="p-16 text-center text-sm text-muted-foreground">
+      We couldn't load this article. Please refresh.
+    </div>
+  ),
+  notFoundComponent: () => (
+    <div className="p-16 text-center text-sm text-muted-foreground">Article not found.</div>
+  ),
   head: ({ loaderData }) => {
     if (!loaderData) {
       return {
@@ -74,8 +86,7 @@ export const Route = createFileRoute("/blog/$slug")({
 });
 
 function BlogPostPage() {
-  const { post } = Route.useLoaderData();
-  const allPosts = getAllBlogPosts();
+  const { post, allPosts } = Route.useLoaderData();
   const currentIndex = allPosts.findIndex((p) => p.slug === post.slug);
   const previousPost = allPosts[currentIndex + 1];
   const nextPost = allPosts[currentIndex - 1];

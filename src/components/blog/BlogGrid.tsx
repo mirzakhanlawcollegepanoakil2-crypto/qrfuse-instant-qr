@@ -1,13 +1,12 @@
-import { getAllBlogPosts, getBlogCategories } from "@/lib/blog";
 import { BlogCard } from "./BlogCard";
 import type { BlogPost } from "@/lib/blog";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 
-export function BlogGrid() {
+export function BlogGrid({ posts }: { posts: BlogPost[] }) {
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
-  const allPosts = getAllBlogPosts();
-  const categories = getBlogCategories();
+  const allPosts = posts;
+  const categories = Array.from(new Set(posts.map((post) => post.category))).sort();
 
   const filteredPosts: BlogPost[] = selectedCategory
     ? allPosts.filter((post) => post.category === selectedCategory)

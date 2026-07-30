@@ -58,20 +58,30 @@ export function AdminPanel({
       setSetupAvailable(available);
       return;
     }
-    try {
-      const { isAdmin: ok } = await checkAdminAccess();
-      if (!ok) {
+    setError("");
+    // The bearer token can lag a fresh sign-in by a tick, so retry before
+    // declaring the account non-admin.
+    for (let attempt = 0; attempt < 3; attempt += 1) {
+      try {
+        const { isAdmin: ok } = await checkAdminAccess();
+        if (ok) {
+          setIsAdmin(true);
+          return;
+        }
         const { available } = await adminSetupAvailable();
         if (available) {
           await claimFirstAdmin();
           setIsAdmin(true);
           return;
         }
+        setIsAdmin(false);
+        return;
+      } catch (err) {
+        setError(err instanceof Error ? err.message : "Could not verify admin access.");
+        await new Promise((resolve) => setTimeout(resolve, 600 * (attempt + 1)));
       }
-      setIsAdmin(ok);
-    } catch {
-      setIsAdmin(false);
     }
+    setIsAdmin(false);
   }, [signedIn]);
 
   useEffect(() => {
@@ -94,6 +104,17 @@ export function AdminPanel({
     return (
       <div className="flex min-h-screen flex-col items-center justify-center gap-4 px-5 text-center">
         <p className="text-sm text-muted-foreground">This account does not have admin access.</p>
+        {error ? <p className="max-w-md text-xs text-destructive">{error}</p> : null}
+        <button
+          type="button"
+          className={primaryBtn}
+          onClick={() => {
+            setIsAdmin(null);
+            void evaluate();
+          }}
+        >
+          Retry
+        </button>
         <button
           type="button"
           className={ghostBtn}

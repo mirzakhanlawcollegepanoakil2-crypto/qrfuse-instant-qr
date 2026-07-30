@@ -1,15 +1,16 @@
 import type QRCodeStyling from "qr-code-styling";
 import { buildQrOptions, type QrStyleState } from "./qr-style";
 
-const QR_STYLING_MODULE = "qr-code-styling";
-
 type QrStylingConstructor = new (options: Parameters<QRCodeStyling["update"]>[0]) => QRCodeStyling;
 
 let cachedCtor: Promise<QrStylingConstructor> | null = null;
 
 async function loadQrStyling(): Promise<QrStylingConstructor> {
   if (!cachedCtor) {
-    cachedCtor = import(QR_STYLING_MODULE).then((m) => m.default as QrStylingConstructor);
+    // Must be a static specifier so the bundler can pre-bundle the chunk.
+    cachedCtor = import("qr-code-styling").then(
+      (m) => (m.default ?? m) as unknown as QrStylingConstructor,
+    );
   }
   return cachedCtor;
 }

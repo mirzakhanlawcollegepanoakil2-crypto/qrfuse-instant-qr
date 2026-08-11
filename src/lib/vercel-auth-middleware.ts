@@ -3,6 +3,7 @@ import { createMiddleware } from "@tanstack/react-start";
 import { getRequest } from "@tanstack/react-start/server";
 
 import type { Database } from "@/integrations/supabase/types";
+import { PUBLIC_BACKEND_KEY, PUBLIC_BACKEND_URL } from "@/lib/public-backend-config";
 
 function createPublicKeyFetch(publicKey: string): typeof fetch {
   return (input, init) => {
@@ -22,15 +23,19 @@ function createPublicKeyFetch(publicKey: string): typeof fetch {
 
 export const requireVercelCompatibleAuth = createMiddleware({ type: "function" }).server(
   async ({ next }) => {
-    const url = process.env["SUPABASE_URL"] ?? process.env["VITE_SUPABASE_URL"];
+    const url =
+      process.env["SUPABASE_URL"] ??
+      process.env["VITE_SUPABASE_URL"] ??
+      PUBLIC_BACKEND_URL;
     const publicKey =
       process.env["SUPABASE_PUBLISHABLE_KEY"] ??
       process.env["VITE_SUPABASE_PUBLISHABLE_KEY"] ??
-      process.env["VITE_SUPABASE_ANON_KEY"];
+      process.env["VITE_SUPABASE_ANON_KEY"] ??
+      PUBLIC_BACKEND_KEY;
 
     if (!url || !publicKey) {
       throw new Error(
-        "The database connection is missing from this deployment. Add VITE_SUPABASE_URL and VITE_SUPABASE_PUBLISHABLE_KEY in Vercel, then redeploy.",
+        "The public backend connection is unavailable.",
       );
     }
 

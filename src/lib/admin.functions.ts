@@ -1,6 +1,6 @@
 import { createServerFn } from "@tanstack/react-start";
 
-import { requireSupabaseAuth } from "@/integrations/supabase/auth-middleware";
+import { requireVercelCompatibleAuth } from "./vercel-auth-middleware";
 import {
   assertAdmin,
   buildDashboardStats,
@@ -9,7 +9,7 @@ import {
 } from "./admin.server";
 
 export const checkAdminAccess = createServerFn({ method: "GET" })
-  .middleware([requireSupabaseAuth])
+  .middleware([requireVercelCompatibleAuth])
   .handler(async ({ context }) => {
     const { data } = await context.supabase.rpc("has_role", {
       _user_id: context.userId,
@@ -29,7 +29,7 @@ export const adminSetupAvailable = createServerFn({ method: "GET" }).handler(asy
 });
 
 export const claimFirstAdmin = createServerFn({ method: "POST" })
-  .middleware([requireSupabaseAuth])
+  .middleware([requireVercelCompatibleAuth])
   .handler(async ({ context }) => {
     const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
     const { count } = await supabaseAdmin
@@ -45,14 +45,14 @@ export const claimFirstAdmin = createServerFn({ method: "POST" })
   });
 
 export const getDashboardStats = createServerFn({ method: "GET" })
-  .middleware([requireSupabaseAuth])
+  .middleware([requireVercelCompatibleAuth])
   .handler(async ({ context }) => {
     await assertAdmin(context.supabase, context.userId);
     return buildDashboardStats(context.supabase);
   });
 
 export const listAdminPosts = createServerFn({ method: "GET" })
-  .middleware([requireSupabaseAuth])
+  .middleware([requireVercelCompatibleAuth])
   .handler(async ({ context }) => {
     await assertAdmin(context.supabase, context.userId);
     const { data, error } = await context.supabase
@@ -64,7 +64,7 @@ export const listAdminPosts = createServerFn({ method: "GET" })
   });
 
 export const savePost = createServerFn({ method: "POST" })
-  .middleware([requireSupabaseAuth])
+  .middleware([requireVercelCompatibleAuth])
   .inputValidator((input: PostInput) => normalizePostInput(input))
   .handler(async ({ data, context }) => {
     await assertAdmin(context.supabase, context.userId);
@@ -98,7 +98,7 @@ export const savePost = createServerFn({ method: "POST" })
   });
 
 export const deletePost = createServerFn({ method: "POST" })
-  .middleware([requireSupabaseAuth])
+  .middleware([requireVercelCompatibleAuth])
   .inputValidator((input: { id: string }) => ({ id: String(input.id) }))
   .handler(async ({ data, context }) => {
     await assertAdmin(context.supabase, context.userId);

@@ -1,6 +1,6 @@
 import { createServerFn } from "@tanstack/react-start";
 
-import { requireSupabaseAuth } from "@/integrations/supabase/auth-middleware";
+import { requireVercelCompatibleAuth } from "./vercel-auth-middleware";
 import {
   assertAdmin,
   buildDashboardStats,
@@ -9,7 +9,7 @@ import {
 } from "./admin.server";
 
 export const checkAdminAccess = createServerFn({ method: "GET" })
-  .middleware([requireSupabaseAuth])
+  .middleware([requireVercelCompatibleAuth])
   .handler(async ({ context }) => {
     const { data } = await context.supabase.rpc("has_role", {
       _user_id: context.userId,
@@ -19,40 +19,15 @@ export const checkAdminAccess = createServerFn({ method: "GET" })
   });
 
 /** True while no admin exists, so the very first account can be claimed. */
-export const adminSetupAvailable = createServerFn({ method: "GET" }).handler(async () => {
-  const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
-  const { count } = await supabaseAdmin
-    .from("user_roles")
-    .select("*", { count: "exact", head: true })
-    .eq("role", "admin");
-  return { available: (count ?? 0) === 0 };
-});
-
-export const claimFirstAdmin = createServerFn({ method: "POST" })
-  .middleware([requireSupabaseAuth])
-  .handler(async ({ context }) => {
-    const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
-    const { count } = await supabaseAdmin
-      .from("user_roles")
-      .select("*", { count: "exact", head: true })
-      .eq("role", "admin");
-    if ((count ?? 0) > 0) throw new Error("An administrator already exists.");
-    const { error } = await supabaseAdmin
-      .from("user_roles")
-      .insert({ user_id: context.userId, role: "admin" });
-    if (error) throw new Error(error.message);
-    return { ok: true };
-  });
-
 export const getDashboardStats = createServerFn({ method: "GET" })
-  .middleware([requireSupabaseAuth])
+  .middleware([requireVercelCompatibleAuth])
   .handler(async ({ context }) => {
     await assertAdmin(context.supabase, context.userId);
     return buildDashboardStats(context.supabase);
   });
 
 export const listAdminPosts = createServerFn({ method: "GET" })
-  .middleware([requireSupabaseAuth])
+  .middleware([requireVercelCompatibleAuth])
   .handler(async ({ context }) => {
     await assertAdmin(context.supabase, context.userId);
     const { data, error } = await context.supabase
@@ -64,7 +39,7 @@ export const listAdminPosts = createServerFn({ method: "GET" })
   });
 
 export const savePost = createServerFn({ method: "POST" })
-  .middleware([requireSupabaseAuth])
+  .middleware([requireVercelCompatibleAuth])
   .inputValidator((input: PostInput) => normalizePostInput(input))
   .handler(async ({ data, context }) => {
     await assertAdmin(context.supabase, context.userId);
@@ -98,7 +73,7 @@ export const savePost = createServerFn({ method: "POST" })
   });
 
 export const deletePost = createServerFn({ method: "POST" })
-  .middleware([requireSupabaseAuth])
+  .middleware([requireVercelCompatibleAuth])
   .inputValidator((input: { id: string }) => ({ id: String(input.id) }))
   .handler(async ({ data, context }) => {
     await assertAdmin(context.supabase, context.userId);

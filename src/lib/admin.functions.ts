@@ -19,31 +19,6 @@ export const checkAdminAccess = createServerFn({ method: "GET" })
   });
 
 /** True while no admin exists, so the very first account can be claimed. */
-export const adminSetupAvailable = createServerFn({ method: "GET" }).handler(async () => {
-  const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
-  const { count } = await supabaseAdmin
-    .from("user_roles")
-    .select("*", { count: "exact", head: true })
-    .eq("role", "admin");
-  return { available: (count ?? 0) === 0 };
-});
-
-export const claimFirstAdmin = createServerFn({ method: "POST" })
-  .middleware([requireVercelCompatibleAuth])
-  .handler(async ({ context }) => {
-    const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
-    const { count } = await supabaseAdmin
-      .from("user_roles")
-      .select("*", { count: "exact", head: true })
-      .eq("role", "admin");
-    if ((count ?? 0) > 0) throw new Error("An administrator already exists.");
-    const { error } = await supabaseAdmin
-      .from("user_roles")
-      .insert({ user_id: context.userId, role: "admin" });
-    if (error) throw new Error(error.message);
-    return { ok: true };
-  });
-
 export const getDashboardStats = createServerFn({ method: "GET" })
   .middleware([requireVercelCompatibleAuth])
   .handler(async ({ context }) => {

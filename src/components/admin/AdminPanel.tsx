@@ -2,9 +2,7 @@ import { useCallback, useEffect, useState } from "react";
 
 import { supabase } from "@/integrations/supabase/client";
 import {
-  adminSetupAvailable,
   checkAdminAccess,
-  claimFirstAdmin,
   deletePost,
   getDashboardStats,
   listAdminPosts,
@@ -54,8 +52,7 @@ export function AdminPanel({
   const evaluate = useCallback(async () => {
     if (!signedIn) {
       setIsAdmin(null);
-      const { available } = await adminSetupAvailable();
-      setSetupAvailable(available);
+      setSetupAvailable(false);
       return;
     }
     setError("");
@@ -65,12 +62,6 @@ export function AdminPanel({
       try {
         const { isAdmin: ok } = await checkAdminAccess();
         if (ok) {
-          setIsAdmin(true);
-          return;
-        }
-        const { available } = await adminSetupAvailable();
-        if (available) {
-          await claimFirstAdmin();
           setIsAdmin(true);
           return;
         }

@@ -1,6 +1,27 @@
 import { Link } from "@tanstack/react-router";
+import { useEffect, useState } from "react";
+
+import { supabase } from "@/integrations/supabase/client";
 
 export function Header() {
+  const [signedIn, setSignedIn] = useState<boolean | null>(null);
+
+  useEffect(() => {
+    let active = true;
+    void supabase.auth.getSession().then(({ data }) => {
+      if (active) setSignedIn(Boolean(data.session));
+    });
+    const { data: sub } = supabase.auth.onAuthStateChange((event, session) => {
+      if (event === "SIGNED_IN" || event === "SIGNED_OUT" || event === "USER_UPDATED") {
+        setSignedIn(Boolean(session));
+      }
+    });
+    return () => {
+      active = false;
+      sub.subscription.unsubscribe();
+    };
+  }, []);
+
   return (
     <header className="sticky top-0 z-50 border-b border-border bg-background/85 backdrop-blur-md">
       <div className="mx-auto flex h-16 max-w-6xl items-center px-5">
@@ -24,6 +45,22 @@ export function Header() {
           >
             Blog
           </Link>
+          {signedIn === null ? null : signedIn ? (
+            <Link
+              to="/dashboard"
+              className="text-muted-foreground transition-colors hover:text-primary"
+              activeProps={{ className: "text-primary" }}
+            >
+              Dashboard
+            </Link>
+          ) : (
+            <Link
+              to="/auth"
+              className="rounded-xl bg-primary px-3.5 py-2 text-primary-foreground transition-opacity hover:opacity-90"
+            >
+              Sign in
+            </Link>
+          )}
         </nav>
       </div>
     </header>

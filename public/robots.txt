@@ -1,4 +1,8 @@
 User-agent: *
 Allow: /
+Disallow: /admin
+Disallow: /auth
+Disallow: /dashboard
+Disallow: /r/
 
 Sitemap: https://qrfuse.vercel.app/sitemap.xml

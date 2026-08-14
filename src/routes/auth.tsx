@@ -68,34 +68,12 @@ function AuthPage() {
     }
   }
 
-  async function google() {
-    setError(null);
-    try {
-      const { lovable } = await import("@/integrations/lovable");
-      await lovable.auth.signInWithOAuth("google", { redirect_uri: window.location.origin });
-    } catch (err) {
-      setError(err instanceof Error ? err.message : "Google sign-in is unavailable.");
-    }
-  }
-
   return (
     <div className="mx-auto flex min-h-[70vh] w-full max-w-md flex-col justify-center px-5 py-16">
       <h1 className="text-2xl font-bold tracking-tight text-foreground">
         {mode === "signin" ? "Sign in" : "Create your account"}
       </h1>
       <p className="mt-2 text-sm text-muted-foreground">{DESCRIPTION}</p>
-
-      <button
-        type="button"
-        onClick={() => void google()}
-        className="mt-6 flex h-11 items-center justify-center gap-2 rounded-xl border border-border bg-card text-sm font-medium text-foreground transition-colors hover:border-primary"
-      >
-        Continue with Google
-      </button>
-
-      <div className="my-5 flex items-center gap-3 text-xs uppercase tracking-wide text-muted-foreground">
-        <span className="h-px flex-1 bg-border" /> or <span className="h-px flex-1 bg-border" />
-      </div>
 
       <form onSubmit={submit} className="space-y-3">
         <label className="block text-sm font-medium text-foreground">

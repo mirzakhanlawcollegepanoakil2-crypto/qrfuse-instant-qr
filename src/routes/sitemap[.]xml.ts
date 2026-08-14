@@ -1,8 +1,9 @@
 import { createFileRoute } from "@tanstack/react-router";
 import type {} from "@tanstack/react-start";
 import type { BlogPost } from "@/lib/blog";
+import { BRAND } from "@/lib/brand";
 
-const SITE_URL = "https://qrfuse.vercel.app";
+const SITE_URL = BRAND.siteUrl;
 
 interface SitemapEntry {
   path: string;

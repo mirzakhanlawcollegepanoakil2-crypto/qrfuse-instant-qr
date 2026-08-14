@@ -1,9 +1,10 @@
 import { createFileRoute } from "@tanstack/react-router";
 import type {} from "@tanstack/react-start";
 import type { BlogPost } from "@/lib/blog";
+import { BRAND } from "@/lib/brand";
 
-const SITE_URL = "https://qrfuse.vercel.app";
-const SITE_TITLE = "QRFUSE Blog";
+const SITE_URL = BRAND.siteUrl;
+const SITE_TITLE = BRAND.blogTitle;
 const SITE_DESCRIPTION =
   "Explore QR code tips, tutorials, and guides to help you make the most of QR codes in your business and personal projects.";
 

@@ -1,6 +1,7 @@
 import type { SupabaseClient } from "@supabase/supabase-js";
 
 import type { Database } from "@/integrations/supabase/types";
+import { BRAND } from "@/lib/brand";
 
 export type AdminClient = SupabaseClient<Database>;
 
@@ -48,7 +49,7 @@ export function normalizePostInput(raw: PostInput): PostInput {
     image_alt: String(raw.image_alt ?? "").trim().slice(0, 200),
     seo_title: String(raw.seo_title ?? "").trim().slice(0, 200),
     seo_description: String(raw.seo_description ?? "").trim().slice(0, 300),
-    author: String(raw.author ?? "QRFUSE Team").trim().slice(0, 80) || "QRFUSE Team",
+    author: String(raw.author ?? BRAND.author).trim().slice(0, 80) || BRAND.author,
     reading_time: Math.min(60, Math.max(1, Number(raw.reading_time) || 4)),
     published: Boolean(raw.published),
   };

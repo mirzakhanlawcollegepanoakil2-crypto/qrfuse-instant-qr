@@ -74,6 +74,99 @@ export type Database = {
         }
         Relationships: []
       }
+      dynamic_codes: {
+        Row: {
+          created_at: string
+          destination_url: string
+          id: string
+          is_active: boolean
+          name: string
+          scan_count: number
+          slug: string
+          style: Json
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          destination_url: string
+          id?: string
+          is_active?: boolean
+          name?: string
+          scan_count?: number
+          slug: string
+          style?: Json
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          destination_url?: string
+          id?: string
+          is_active?: boolean
+          name?: string
+          scan_count?: number
+          slug?: string
+          style?: Json
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      entitlements: {
+        Row: {
+          created_at: string
+          dynamic_qr_limit: number
+          plan: Database["public"]["Enums"]["plan_tier"]
+          trial_ends_at: string | null
+          trial_started_at: string | null
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          dynamic_qr_limit?: number
+          plan?: Database["public"]["Enums"]["plan_tier"]
+          trial_ends_at?: string | null
+          trial_started_at?: string | null
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          dynamic_qr_limit?: number
+          plan?: Database["public"]["Enums"]["plan_tier"]
+          trial_ends_at?: string | null
+          trial_started_at?: string | null
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      profiles: {
+        Row: {
+          avatar_url: string
+          created_at: string
+          display_name: string
+          id: string
+          updated_at: string
+        }
+        Insert: {
+          avatar_url?: string
+          created_at?: string
+          display_name?: string
+          id: string
+          updated_at?: string
+        }
+        Update: {
+          avatar_url?: string
+          created_at?: string
+          display_name?: string
+          id?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
       qr_events: {
         Row: {
           created_at: string
@@ -91,6 +184,44 @@ export type Database = {
           qr_type?: string
         }
         Relationships: []
+      }
+      scans: {
+        Row: {
+          code_id: string
+          country: string
+          device: string
+          id: string
+          referrer: string
+          scanned_at: string
+          visitor_hash: string
+        }
+        Insert: {
+          code_id: string
+          country?: string
+          device?: string
+          id?: string
+          referrer?: string
+          scanned_at?: string
+          visitor_hash?: string
+        }
+        Update: {
+          code_id?: string
+          country?: string
+          device?: string
+          id?: string
+          referrer?: string
+          scanned_at?: string
+          visitor_hash?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "scans_code_id_fkey"
+            columns: ["code_id"]
+            isOneToOne: false
+            referencedRelation: "dynamic_codes"
+            referencedColumns: ["id"]
+          },
+        ]
       }
       user_roles: {
         Row: {
@@ -118,6 +249,8 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
+      count_dynamic_codes: { Args: { _user_id: string }; Returns: number }
+      has_premium_access: { Args: { _user_id: string }; Returns: boolean }
       has_role: {
         Args: {
           _role: Database["public"]["Enums"]["app_role"]
@@ -125,9 +258,24 @@ export type Database = {
         }
         Returns: boolean
       }
+      record_scan: {
+        Args: {
+          _country?: string
+          _device?: string
+          _referrer?: string
+          _slug: string
+          _visitor_hash?: string
+        }
+        Returns: string
+      }
+      start_trial: {
+        Args: never
+        Returns: Database["public"]["Enums"]["plan_tier"]
+      }
     }
     Enums: {
       app_role: "admin"
+      plan_tier: "free" | "trial" | "pro"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -256,6 +404,7 @@ export const Constants = {
   public: {
     Enums: {
       app_role: ["admin"],
+      plan_tier: ["free", "trial", "pro"],
     },
   },
 } as const

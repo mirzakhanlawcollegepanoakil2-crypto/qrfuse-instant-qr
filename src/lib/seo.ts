@@ -1,3 +1,5 @@
+import { BRAND } from "@/lib/brand";
+
 /**
  * SEO utilities for generating meta tags and schema markup
  */
@@ -30,7 +32,7 @@ export function generateOGTags(config: SEOConfig) {
           { property: "og:image:alt", content: config.imageAlt || config.title },
         ]
       : []),
-    { property: "og:site_name", content: "QRFUSE" },
+    { property: "og:site_name", content: BRAND.name },
   ];
 }
 
@@ -58,14 +60,14 @@ export function generateArticleSchema(config: SEOConfig) {
     image: config.image,
     author: {
       "@type": "Organization",
-      name: config.author || "QRFUSE",
+      name: config.author || BRAND.name,
     },
     publisher: {
       "@type": "Organization",
-      name: "QRFUSE",
+      name: BRAND.name,
       logo: {
         "@type": "ImageObject",
-        url: "https://qrfuse.vercel.app/favicon.png",
+        url: BRAND.logoUrl,
       },
     },
     datePublished: config.publishedDate,
@@ -85,14 +87,14 @@ export function generateBlogPostingSchema(config: SEOConfig) {
     image: config.image,
     author: {
       "@type": "Organization",
-      name: config.author || "QRFUSE",
+      name: config.author || BRAND.name,
     },
     publisher: {
       "@type": "Organization",
-      name: "QRFUSE",
+      name: BRAND.name,
       logo: {
         "@type": "ImageObject",
-        url: "https://qrfuse.vercel.app/favicon.png",
+        url: BRAND.logoUrl,
       },
     },
     datePublished: config.publishedDate,
@@ -107,11 +109,10 @@ export function generateOrganizationSchema() {
   return {
     "@context": "https://schema.org",
     "@type": "Organization",
-    name: "QRFUSE",
-    url: "https://qrfuse.vercel.app",
-    logo: "https://qrfuse.vercel.app/favicon.png",
-    description:
-      "Generate QR codes instantly for URLs, text, Wi-Fi, email, phone numbers, and SMS.",
+    name: BRAND.name,
+    url: BRAND.siteUrl,
+    logo: BRAND.logoUrl,
+    description: BRAND.description,
   };
 }
 

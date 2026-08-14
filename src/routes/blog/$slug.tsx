@@ -7,6 +7,7 @@ import {
   generateTwitterTags,
   generateBlogPostingSchema,
 } from "@/lib/seo";
+import { BRAND, absoluteUrl } from "@/lib/brand";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { ArrowLeft } from "lucide-react";
@@ -33,13 +34,13 @@ export const Route = createFileRoute("/blog/$slug")({
   head: ({ loaderData }) => {
     if (!loaderData) {
       return {
-        meta: [{ title: "Article not found | QRFUSE Blog" }, { name: "robots", content: "noindex" }],
+        meta: [{ title: `Article not found | ${BRAND.blogTitle}` }, { name: "robots", content: "noindex" }],
       };
     }
     const post = loaderData.post;
     return {
       meta: [
-        { title: `${post.title} | QRFUSE Blog` },
+        { title: `${post.title} | ${BRAND.blogTitle}` },
         { name: "description", content: post.description },
         { name: "keywords", content: `${post.category}, QR code, ${post.title}` },
         { name: "author", content: post.author },
@@ -49,7 +50,7 @@ export const Route = createFileRoute("/blog/$slug")({
         ...generateOGTags({
           title: post.title,
           description: post.description,
-          url: `https://qrfuse.vercel.app/blog/${post.slug}`,
+          url: absoluteUrl(`/blog/${post.slug}`),
           image: post.image,
           imageAlt: post.imageAlt,
           type: "article",
@@ -57,12 +58,12 @@ export const Route = createFileRoute("/blog/$slug")({
         ...generateTwitterTags({
           title: post.title,
           description: post.description,
-          url: `https://qrfuse.vercel.app/blog/${post.slug}`,
+          url: absoluteUrl(`/blog/${post.slug}`),
           image: post.image,
         }),
       ],
       links: [
-        { rel: "canonical", href: `https://qrfuse.vercel.app/blog/${post.slug}` },
+        { rel: "canonical", href: absoluteUrl(`/blog/${post.slug}`) },
       ],
       scripts: [
         {
@@ -71,7 +72,7 @@ export const Route = createFileRoute("/blog/$slug")({
             generateBlogPostingSchema({
               title: post.title,
               description: post.description,
-              url: `https://qrfuse.vercel.app/blog/${post.slug}`,
+              url: absoluteUrl(`/blog/${post.slug}`),
               image: post.image,
               imageAlt: post.imageAlt,
               author: post.author,

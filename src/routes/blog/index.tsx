@@ -1,6 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { BlogGrid } from "@/components/blog/BlogGrid";
 import { fetchPublishedPosts } from "@/lib/blog-public.functions";
+import { absoluteUrl } from "@/lib/brand";
 import {
   generateOGTags,
   generateTwitterTags,
@@ -28,17 +29,17 @@ export const Route = createFileRoute("/blog/")({
       ...generateOGTags({
         title: "QR Code Blog - Tips, Guides & Tutorials | QRFUSE",
         description: BLOG_DESCRIPTION,
-        url: "https://qrfuse.vercel.app/blog",
+        url: absoluteUrl("/blog"),
         type: "website",
       }),
       ...generateTwitterTags({
         title: "QR Code Blog - Tips, Guides & Tutorials | QRFUSE",
         description: BLOG_DESCRIPTION,
-        url: "https://qrfuse.vercel.app/blog",
+        url: absoluteUrl("/blog"),
       }),
     ],
     links: [
-      { rel: "canonical", href: "https://qrfuse.vercel.app/blog" },
+      { rel: "canonical", href: absoluteUrl("/blog") },
     ],
     scripts: [
       {

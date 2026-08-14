@@ -13,6 +13,7 @@ import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
 import { Header } from "../components/layout/Header";
 import { Footer } from "../components/layout/Footer";
+import { BRAND, absoluteUrl } from "@/lib/brand";
 
 function NotFoundComponent() {
   return (
@@ -79,17 +80,17 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "QRFUSE – Free QR Code Generator" },
+      { title: `${BRAND.name} – ${BRAND.tagline}` },
       {
         name: "description",
         content:
           "Generate QR codes instantly for URLs, text, Wi-Fi, email, phone numbers, and SMS. Fast, free, secure, and mobile-friendly.",
       },
       { property: "og:type", content: "website" },
-      { property: "og:site_name", content: "QRFUSE" },
+      { property: "og:site_name", content: BRAND.name },
       { name: "twitter:card", content: "summary_large_image" },
-      { property: "og:title", content: "QRFUSE – Free QR Code Generator" },
-      { name: "twitter:title", content: "QRFUSE – Free QR Code Generator" },
+      { property: "og:title", content: `${BRAND.name} – ${BRAND.tagline}` },
+      { name: "twitter:title", content: `${BRAND.name} – ${BRAND.tagline}` },
       { property: "og:description", content: "Generate QR codes instantly for URLs, text, Wi-Fi, email, phone numbers, and SMS. Fast, free, secure, and mobile-friendly." },
       { name: "twitter:description", content: "Generate QR codes instantly for URLs, text, Wi-Fi, email, phone numbers, and SMS. Fast, free, secure, and mobile-friendly." },
       { property: "og:image", content: "https://storage.googleapis.com/gpt-engineer-file-uploads/lENX7TPKF3YtwcBEBseO9J9yxlM2/social-images/social-1785081350094-1000090114.webp" },
@@ -107,8 +108,8 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       {
         rel: "alternate",
         type: "application/rss+xml",
-        title: "QRFUSE Blog RSS Feed",
-        href: "https://qrfuse.vercel.app/rss.xml",
+        title: `${BRAND.blogTitle} RSS Feed`,
+        href: absoluteUrl("/rss.xml"),
       },
       {
         rel: "stylesheet",
@@ -121,7 +122,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
         children: JSON.stringify({
           "@context": "https://schema.org",
           "@type": "WebApplication",
-          name: "QRFUSE",
+          name: BRAND.name,
           applicationCategory: "UtilitiesApplication",
           operatingSystem: "Any",
           description:

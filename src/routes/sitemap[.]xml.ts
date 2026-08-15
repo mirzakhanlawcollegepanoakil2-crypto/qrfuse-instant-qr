@@ -15,6 +15,7 @@ interface SitemapEntry {
 function generateSitemapXml(posts: BlogPost[]) {
   const staticPages: SitemapEntry[] = [
     { path: "/", changefreq: "weekly", priority: "1.0" },
+    { path: "/dynamic-qr-codes", changefreq: "weekly", priority: "0.9" },
     { path: "/blog", changefreq: "weekly", priority: "0.9" },
     { path: "/privacy", changefreq: "monthly", priority: "0.5" },
     { path: "/terms", changefreq: "monthly", priority: "0.5" },

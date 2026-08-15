@@ -1,8 +1,9 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { Link, createFileRoute } from "@tanstack/react-router";
 
 import { QrGenerator } from "../components/qr/QrGenerator";
 import { Faq, FAQ_ITEMS } from "../components/sections/Faq";
 import { Features } from "../components/sections/Features";
+import { StaticVsDynamic } from "../components/sections/StaticVsDynamic";
 
 const DESCRIPTION =
   "Generate QR codes instantly for URLs, text, Wi-Fi, email, phone numbers, and SMS. Fast, free, secure, and mobile-friendly.";
@@ -49,11 +50,26 @@ function Index() {
             Generate QR codes instantly for websites, text, Wi-Fi, email, phone numbers, SMS, and
             more. No signup required.
           </p>
+          <div className="mt-8 flex flex-wrap justify-center gap-3">
+            <a
+              href="#qr-panel"
+              className="inline-flex h-12 items-center rounded-xl bg-primary px-6 text-sm font-semibold text-primary-foreground transition-opacity hover:opacity-90"
+            >
+              Create Free QR
+            </a>
+            <Link
+              to="/dynamic-qr-codes"
+              className="inline-flex h-12 items-center rounded-xl border border-border px-6 text-sm font-semibold text-foreground transition-colors hover:border-primary/50"
+            >
+              Try Dynamic QR
+            </Link>
+          </div>
         </div>
         <div className="mt-10">
           <QrGenerator />
         </div>
       </section>
+      <StaticVsDynamic />
       <Features />
       <Faq />
     </div>

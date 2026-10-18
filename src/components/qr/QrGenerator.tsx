@@ -15,8 +15,8 @@ import {
 } from "./qr-types";
 import { trackQrGeneration } from "@/lib/qr-tracking";
 
-export function QrGenerator() {
-  const [type, setType] = useState<QrType>("url");
+export function QrGenerator({ initialType = "url" }: { initialType?: QrType } = {}) {
+  const [type, setType] = useState<QrType>(initialType);
   const [form, setForm] = useState<QrFormState>(emptyForm);
   const [style, setStyle] = useState<QrStyleState>(defaultStyle);
   const [showCustomize, setShowCustomize] = useState(false);

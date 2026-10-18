@@ -43,7 +43,7 @@ function Index() {
     <div className="pb-4">
       <section className="mx-auto max-w-3xl px-5 pt-14 sm:pt-20">
         <div className="text-center">
-          <h1 className="text-3xl font-bold tracking-tight text-foreground sm:text-5xl">
+          <h1 className="text-4xl font-extrabold tracking-tight text-foreground sm:text-6xl">
             Free QR Code Generator
           </h1>
           <p className="mx-auto mt-4 max-w-2xl text-base leading-relaxed text-muted-foreground sm:text-lg">
@@ -53,7 +53,7 @@ function Index() {
           <div className="mt-8 flex flex-wrap justify-center gap-3">
             <a
               href="#qr-panel"
-              className="inline-flex h-12 items-center rounded-xl bg-primary px-6 text-sm font-semibold text-primary-foreground transition-opacity hover:opacity-90"
+              className="inline-flex h-12 items-center rounded-xl bg-primary px-6 text-sm font-semibold text-primary-foreground shadow-[var(--shadow-glow)] transition-all hover:-translate-y-0.5 hover:opacity-95"
             >
               Create Free QR
             </a>

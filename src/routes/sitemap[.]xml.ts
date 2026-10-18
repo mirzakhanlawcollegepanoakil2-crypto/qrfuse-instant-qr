@@ -16,6 +16,10 @@ function generateSitemapXml(posts: BlogPost[]) {
   const staticPages: SitemapEntry[] = [
     { path: "/", changefreq: "weekly", priority: "1.0" },
     { path: "/dynamic-qr-codes", changefreq: "weekly", priority: "0.9" },
+    { path: "/url-qr-code-generator", changefreq: "monthly", priority: "0.8" },
+    { path: "/wifi-qr-code-generator", changefreq: "monthly", priority: "0.8" },
+    { path: "/vcard-qr-code-generator", changefreq: "monthly", priority: "0.8" },
+    { path: "/text-qr-code-generator", changefreq: "monthly", priority: "0.8" },
     { path: "/blog", changefreq: "weekly", priority: "0.9" },
     { path: "/privacy", changefreq: "monthly", priority: "0.5" },
     { path: "/terms", changefreq: "monthly", priority: "0.5" },

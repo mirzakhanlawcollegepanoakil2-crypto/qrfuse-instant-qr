@@ -12,9 +12,9 @@ export const Route = createFileRoute("/contact")({
       { name: "description", content: DESCRIPTION },
       { property: "og:title", content: "Contact – QRFUSE" },
       { property: "og:description", content: DESCRIPTION },
-      { property: "og:url", content: "/contact" },
+      { property: "og:url", content: "https://qrfuse.vercel.app/contact" },
     ],
-    links: [{ rel: "canonical", href: "/contact" }],
+    links: [{ rel: "canonical", href: "https://qrfuse.vercel.app/contact" }],
     scripts: [
       {
         async: true,

@@ -1,9 +1,10 @@
 import { createFileRoute } from "@tanstack/react-router";
 
 import { LegalPage, LegalSection } from "../components/layout/LegalPage";
+import { absoluteUrl } from "@/lib/brand";
 
 const DESCRIPTION =
-  "QRFUSE generates every QR code inside your browser. Learn what data we do and do not process.";
+  "How QRFUSE handles your data: static QR codes are generated in your browser, what we store for accounts and dynamic QR codes, and which third parties we use.";
 
 export const Route = createFileRoute("/privacy")({
   head: () => ({
@@ -12,9 +13,9 @@ export const Route = createFileRoute("/privacy")({
       { name: "description", content: DESCRIPTION },
       { property: "og:title", content: "Privacy Policy – QRFUSE" },
       { property: "og:description", content: DESCRIPTION },
-      { property: "og:url", content: "/privacy" },
+      { property: "og:url", content: absoluteUrl("/privacy") },
     ],
-    links: [{ rel: "canonical", href: "/privacy" }],
+    links: [{ rel: "canonical", href: absoluteUrl("/privacy") }],
   }),
   component: PrivacyPage,
 });
@@ -23,31 +24,51 @@ function PrivacyPage() {
   return (
     <LegalPage
       title="Privacy Policy"
-      intro="QRFUSE is built to work without collecting your data. This page explains exactly how that works."
+      intro="This page explains what QRFUSE processes, what it stores, and why. Last updated October 2026."
     >
-      <LegalSection heading="What we process">
+      <LegalSection heading="Static QR codes">
         <p>
-          QR codes are generated entirely in your browser using client-side JavaScript. The URLs,
-          text, Wi-Fi credentials, email addresses, phone numbers and messages you enter are never
-          transmitted to us and are never stored.
+          Static QR codes are generated entirely in your browser. The URLs, text, Wi-Fi passwords,
+          contact details and messages you enter are not sent to our servers. Generated PNG, SVG and
+          PDF files are created on your device.
+        </p>
+        <p>
+          To understand which features are used, we record an anonymous event each time a code is
+          generated containing only the QR type (for example "wifi" or "url") and a timestamp — never
+          the content of the code.
         </p>
       </LegalSection>
-      <LegalSection heading="Accounts and cookies">
+      <LegalSection heading="Accounts">
         <p>
-          QRFUSE has no accounts, no sign-up and no login. We do not set advertising or tracking
-          cookies, and we do not build profiles of visitors.
+          Accounts are optional and only needed for dynamic QR codes. If you create one, we store
+          your email address, a securely hashed password handled by our authentication provider,
+          and your plan or trial status.
         </p>
       </LegalSection>
-      <LegalSection heading="Downloads">
+      <LegalSection heading="Dynamic QR codes and scan analytics">
         <p>
-          PNG and SVG files are created on your device and saved directly through your browser. No
-          copy of a generated QR code is kept by QRFUSE.
+          For dynamic codes we store the destination URL you set, the short redirect link, and its
+          status. When someone scans a dynamic code we record the time, device category (for example
+          mobile or desktop) and country where available. We do not store raw IP addresses.
+        </p>
+      </LegalSection>
+      <LegalSection heading="Cookies and analytics">
+        <p>
+          We use Google Analytics to measure visits and improve the site; it may set cookies and
+          process data as described in Google's privacy policy. Signed-in users also have a session
+          stored in the browser to keep them logged in. We do not run advertising on QRFUSE.
         </p>
       </LegalSection>
       <LegalSection heading="Third parties">
         <p>
-          The site loads the Inter typeface from Google Fonts. Aside from that request, QRFUSE makes
-          no third-party calls while you generate a code.
+          QRFUSE loads fonts from Google Fonts, uses Google Analytics, and stores account and dynamic
+          QR data with our hosting and database providers. We do not sell personal data.
+        </p>
+      </LegalSection>
+      <LegalSection heading="Your choices">
+        <p>
+          You can delete your dynamic QR codes from your dashboard at any time. To delete your
+          account or request a copy of your data, contact us at support@qrfuse.app.
         </p>
       </LegalSection>
     </LegalPage>

@@ -19,6 +19,10 @@ import { Route as PrivacyRouteImport } from './routes/privacy'
 import { Route as RssDotxmlRouteImport } from './routes/rss[.]xml'
 import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as TermsRouteImport } from './routes/terms'
+import { Route as TextQrCodeGeneratorRouteImport } from './routes/text-qr-code-generator'
+import { Route as UrlQrCodeGeneratorRouteImport } from './routes/url-qr-code-generator'
+import { Route as VcardQrCodeGeneratorRouteImport } from './routes/vcard-qr-code-generator'
+import { Route as WifiQrCodeGeneratorRouteImport } from './routes/wifi-qr-code-generator'
 import { Route as AuthenticatedDashboardRouteImport } from './routes/_authenticated/dashboard'
 import { Route as BlogIndexRouteImport } from './routes/blog/index'
 import { Route as BlogSlugRouteImport } from './routes/blog/$slug'
@@ -74,6 +78,26 @@ const TermsRoute = TermsRouteImport.update({
   path: '/terms',
   getParentRoute: () => rootRouteImport,
 } as any)
+const TextQrCodeGeneratorRoute = TextQrCodeGeneratorRouteImport.update({
+  id: '/text-qr-code-generator',
+  path: '/text-qr-code-generator',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const UrlQrCodeGeneratorRoute = UrlQrCodeGeneratorRouteImport.update({
+  id: '/url-qr-code-generator',
+  path: '/url-qr-code-generator',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const VcardQrCodeGeneratorRoute = VcardQrCodeGeneratorRouteImport.update({
+  id: '/vcard-qr-code-generator',
+  path: '/vcard-qr-code-generator',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const WifiQrCodeGeneratorRoute = WifiQrCodeGeneratorRouteImport.update({
+  id: '/wifi-qr-code-generator',
+  path: '/wifi-qr-code-generator',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const AuthenticatedDashboardRoute = AuthenticatedDashboardRouteImport.update({
   id: '/dashboard',
   path: '/dashboard',
@@ -110,6 +134,10 @@ export interface FileRoutesByFullPath {
   '/rss.xml': typeof RssDotxmlRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/terms': typeof TermsRoute
+  '/text-qr-code-generator': typeof TextQrCodeGeneratorRoute
+  '/url-qr-code-generator': typeof UrlQrCodeGeneratorRoute
+  '/vcard-qr-code-generator': typeof VcardQrCodeGeneratorRoute
+  '/wifi-qr-code-generator': typeof WifiQrCodeGeneratorRoute
   '/dashboard': typeof AuthenticatedDashboardRoute
   '/blog/$slug': typeof BlogSlugRoute
   '/r/$slug': typeof RSlugRoute
@@ -126,6 +154,10 @@ export interface FileRoutesByTo {
   '/rss.xml': typeof RssDotxmlRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/terms': typeof TermsRoute
+  '/text-qr-code-generator': typeof TextQrCodeGeneratorRoute
+  '/url-qr-code-generator': typeof UrlQrCodeGeneratorRoute
+  '/vcard-qr-code-generator': typeof VcardQrCodeGeneratorRoute
+  '/wifi-qr-code-generator': typeof WifiQrCodeGeneratorRoute
   '/dashboard': typeof AuthenticatedDashboardRoute
   '/blog/$slug': typeof BlogSlugRoute
   '/r/$slug': typeof RSlugRoute
@@ -144,6 +176,10 @@ export interface FileRoutesById {
   '/rss.xml': typeof RssDotxmlRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/terms': typeof TermsRoute
+  '/text-qr-code-generator': typeof TextQrCodeGeneratorRoute
+  '/url-qr-code-generator': typeof UrlQrCodeGeneratorRoute
+  '/vcard-qr-code-generator': typeof VcardQrCodeGeneratorRoute
+  '/wifi-qr-code-generator': typeof WifiQrCodeGeneratorRoute
   '/_authenticated/dashboard': typeof AuthenticatedDashboardRoute
   '/blog/$slug': typeof BlogSlugRoute
   '/r/$slug': typeof RSlugRoute
@@ -162,6 +198,10 @@ export interface FileRouteTypes {
     | '/rss.xml'
     | '/sitemap.xml'
     | '/terms'
+    | '/text-qr-code-generator'
+    | '/url-qr-code-generator'
+    | '/vcard-qr-code-generator'
+    | '/wifi-qr-code-generator'
     | '/dashboard'
     | '/blog/$slug'
     | '/r/$slug'
@@ -178,6 +218,10 @@ export interface FileRouteTypes {
     | '/rss.xml'
     | '/sitemap.xml'
     | '/terms'
+    | '/text-qr-code-generator'
+    | '/url-qr-code-generator'
+    | '/vcard-qr-code-generator'
+    | '/wifi-qr-code-generator'
     | '/dashboard'
     | '/blog/$slug'
     | '/r/$slug'
@@ -195,6 +239,10 @@ export interface FileRouteTypes {
     | '/rss.xml'
     | '/sitemap.xml'
     | '/terms'
+    | '/text-qr-code-generator'
+    | '/url-qr-code-generator'
+    | '/vcard-qr-code-generator'
+    | '/wifi-qr-code-generator'
     | '/_authenticated/dashboard'
     | '/blog/$slug'
     | '/r/$slug'
@@ -213,6 +261,10 @@ export interface RootRouteChildren {
   RssDotxmlRoute: typeof RssDotxmlRoute
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
   TermsRoute: typeof TermsRoute
+  TextQrCodeGeneratorRoute: typeof TextQrCodeGeneratorRoute
+  UrlQrCodeGeneratorRoute: typeof UrlQrCodeGeneratorRoute
+  VcardQrCodeGeneratorRoute: typeof VcardQrCodeGeneratorRoute
+  WifiQrCodeGeneratorRoute: typeof WifiQrCodeGeneratorRoute
   BlogSlugRoute: typeof BlogSlugRoute
   RSlugRoute: typeof RSlugRoute
   BlogIndexRoute: typeof BlogIndexRoute
@@ -291,6 +343,34 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof TermsRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/text-qr-code-generator': {
+      id: '/text-qr-code-generator'
+      path: '/text-qr-code-generator'
+      fullPath: '/text-qr-code-generator'
+      preLoaderRoute: typeof TextQrCodeGeneratorRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/url-qr-code-generator': {
+      id: '/url-qr-code-generator'
+      path: '/url-qr-code-generator'
+      fullPath: '/url-qr-code-generator'
+      preLoaderRoute: typeof UrlQrCodeGeneratorRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/vcard-qr-code-generator': {
+      id: '/vcard-qr-code-generator'
+      path: '/vcard-qr-code-generator'
+      fullPath: '/vcard-qr-code-generator'
+      preLoaderRoute: typeof VcardQrCodeGeneratorRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/wifi-qr-code-generator': {
+      id: '/wifi-qr-code-generator'
+      path: '/wifi-qr-code-generator'
+      fullPath: '/wifi-qr-code-generator'
+      preLoaderRoute: typeof WifiQrCodeGeneratorRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/_authenticated/dashboard': {
       id: '/_authenticated/dashboard'
       path: '/dashboard'
@@ -351,6 +431,10 @@ const rootRouteChildren: RootRouteChildren = {
   RssDotxmlRoute: RssDotxmlRoute,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
   TermsRoute: TermsRoute,
+  TextQrCodeGeneratorRoute: TextQrCodeGeneratorRoute,
+  UrlQrCodeGeneratorRoute: UrlQrCodeGeneratorRoute,
+  VcardQrCodeGeneratorRoute: VcardQrCodeGeneratorRoute,
+  WifiQrCodeGeneratorRoute: WifiQrCodeGeneratorRoute,
   BlogSlugRoute: BlogSlugRoute,
   RSlugRoute: RSlugRoute,
   BlogIndexRoute: BlogIndexRoute,

@@ -11,6 +11,21 @@ export function Footer() {
           <p className="mt-1 text-sm text-muted-foreground">Create QR codes instantly.</p>
         </div>
         <nav aria-label="Footer" className="flex flex-wrap gap-x-6 gap-y-2 text-sm">
+          <Link to="/url-qr-code-generator" className="text-muted-foreground transition-colors hover:text-primary">
+            URL QR
+          </Link>
+          <Link to="/wifi-qr-code-generator" className="text-muted-foreground transition-colors hover:text-primary">
+            Wi-Fi QR
+          </Link>
+          <Link to="/vcard-qr-code-generator" className="text-muted-foreground transition-colors hover:text-primary">
+            vCard QR
+          </Link>
+          <Link to="/text-qr-code-generator" className="text-muted-foreground transition-colors hover:text-primary">
+            Text QR
+          </Link>
+          <Link to="/dynamic-qr-codes" className="text-muted-foreground transition-colors hover:text-primary">
+            Dynamic QR
+          </Link>
           <Link to="/blog" className="text-muted-foreground transition-colors hover:text-primary">
             Blog
           </Link>

@@ -21,6 +21,12 @@ const C: LandingContent = {
     "Shorter URLs produce simpler, easier-to-scan codes.",
     "Keep strong contrast between the code and its background.",
   ],
+  faqs: [
+    { question: "Does a static URL QR code expire?", answer: "The code itself has no expiry. It continues to encode the same website address, but the destination must remain available for the link to work." },
+    { question: "Can I change the link after printing?", answer: "Not with a static QR code. Create a new code for a different link, or use the separate account-based dynamic URL feature if you need an editable destination." },
+    { question: "Does scanning a website QR need internet access?", answer: "A camera can read the address offline, but opening the website normally requires an internet connection." },
+    { question: "Are scans tracked for free static URL codes?", answer: "No. Static codes link directly to the address you enter rather than a QRFUSE redirect. QRFUSE scan analytics are part of the separate dynamic feature." },
+  ],
   uses: [
     { title: "Flyers & posters", body: "Send readers straight to an event page, menu or sign-up form." },
     { title: "Packaging", body: "Link to setup guides, product videos or warranty registration." },

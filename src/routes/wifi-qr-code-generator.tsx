@@ -21,6 +21,12 @@ const C: LandingContent = {
     "If you change your Wi-Fi password, create and print a new code.",
     "Test with both an iPhone and an Android camera before printing.",
   ],
+  faqs: [
+    { question: "Which Wi-Fi security options are supported?", answer: "Choose WPA/WPA2, WEP or an open network. The network name and password must match your router settings exactly." },
+    { question: "Can someone read the password from the QR code?", answer: "Yes. A Wi-Fi QR code contains the network credentials; it does not encrypt or hide them. Share a guest network rather than a private network." },
+    { question: "Will every phone join the network automatically?", answer: "Compatible phones offer to join after scanning, but behavior depends on the camera app and device. Test on the devices your guests use; some scanners only display the encoded text." },
+    { question: "What happens when I change the Wi-Fi password?", answer: "The printed code still contains the old password. Generate and distribute a new code after changing the network name, password or security setting." },
+  ],
   uses: [
     { title: "Cafés & restaurants", body: "Put a table card or wall sign up so customers connect without asking staff." },
     { title: "Rentals & hotels", body: "Add the code to a welcome guide so guests are online in seconds." },

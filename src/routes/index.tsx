@@ -5,6 +5,7 @@ import { QrGenerator } from "../components/qr/QrGenerator";
 import { Faq, FAQ_ITEMS } from "../components/sections/Faq";
 import { Features } from "../components/sections/Features";
 import { StaticVsDynamic } from "../components/sections/StaticVsDynamic";
+import { QrTools } from "../components/sections/QrTools";
 
 const TITLE = "Free QR Code Generator — Static & Dynamic QR | QRFUSE";
 const DESCRIPTION =
@@ -17,6 +18,8 @@ export const Route = createFileRoute("/")({
     meta: [
       { title: TITLE },
       { name: "description", content: DESCRIPTION },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
       { property: "og:title", content: TITLE },
       { property: "og:description", content: DESCRIPTION },
       { property: "og:url", content: absoluteUrl("/") },
@@ -87,6 +90,7 @@ function Index() {
         </div>
       </section>
       <StaticVsDynamic />
+      <QrTools />
       <Features />
       <Faq />
     </div>

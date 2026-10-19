@@ -3,6 +3,7 @@ import { Link } from "@tanstack/react-router";
 import { QrGenerator } from "../qr/QrGenerator";
 import type { QrType } from "../qr/qr-types";
 import { BRAND, absoluteUrl } from "@/lib/brand";
+import { QR_TOOLS } from "../sections/QrTools";
 
 export interface LandingContent {
   path: string;
@@ -14,6 +15,7 @@ export interface LandingContent {
   steps: string[];
   uses: { title: string; body: string }[];
   tips: string[];
+  faqs: { question: string; answer: string }[];
 }
 
 export function landingHead(c: LandingContent) {
@@ -47,13 +49,7 @@ export function landingHead(c: LandingContent) {
   };
 }
 
-const RELATED = [
-  { to: "/url-qr-code-generator", label: "URL QR codes" },
-  { to: "/wifi-qr-code-generator", label: "Wi-Fi QR codes" },
-  { to: "/vcard-qr-code-generator", label: "Contact (vCard) QR codes" },
-  { to: "/text-qr-code-generator", label: "Text QR codes" },
-  { to: "/dynamic-qr-codes", label: "Dynamic QR codes" },
-] as const;
+const RELATED = [...QR_TOOLS, { to: "/dynamic-qr-codes", label: "Dynamic QR codes" }] as const;
 
 export function QrTypeLanding({ c }: { c: LandingContent }) {
   return (
@@ -66,14 +62,17 @@ export function QrTypeLanding({ c }: { c: LandingContent }) {
           <p className="mx-auto mt-4 max-w-2xl text-base leading-relaxed text-muted-foreground sm:text-lg">
             {c.intro}
           </p>
+          <p className="mt-4 text-sm leading-relaxed text-muted-foreground">
+            Free static QR · No account required · PNG, SVG and PDF downloads
+          </p>
         </div>
         <div className="mt-10">
-          <QrGenerator initialType={c.type} />
+          <QrGenerator key={c.type} initialType={c.type} />
         </div>
       </section>
 
       <section className="mx-auto mt-20 grid max-w-5xl gap-6 px-5 md:grid-cols-2">
-        <div className="rounded-3xl border border-border bg-card p-6 sm:p-8">
+        <div className="py-6 sm:py-8">
           <h2 className="text-xl font-semibold text-foreground">How to create one</h2>
           <ol className="mt-4 list-decimal space-y-2 pl-5 text-sm leading-relaxed text-muted-foreground">
             {c.steps.map((s) => (
@@ -81,7 +80,7 @@ export function QrTypeLanding({ c }: { c: LandingContent }) {
             ))}
           </ol>
         </div>
-        <div className="rounded-3xl border border-border bg-card p-6 sm:p-8">
+        <div className="py-6 sm:py-8">
           <h2 className="text-xl font-semibold text-foreground">Tips for reliable scans</h2>
           <ul className="mt-4 list-disc space-y-2 pl-5 text-sm leading-relaxed text-muted-foreground">
             {c.tips.map((s) => (
@@ -101,6 +100,23 @@ export function QrTypeLanding({ c }: { c: LandingContent }) {
             </div>
           ))}
         </div>
+      </section>
+
+      <section aria-labelledby="type-faq-heading" className="mx-auto mt-12 max-w-5xl px-5">
+        <h2 id="type-faq-heading" className="text-2xl font-bold text-foreground">Frequently asked questions</h2>
+        <dl className="mt-6 divide-y divide-border">
+          {c.faqs.map((faq) => (
+            <div key={faq.question} className="py-5">
+              <dt className="font-semibold text-foreground">{faq.question}</dt>
+              <dd className="mt-2 text-sm leading-relaxed text-muted-foreground">{faq.answer}</dd>
+            </div>
+          ))}
+        </dl>
+        <p className="mt-6 text-sm leading-relaxed text-muted-foreground">
+          These free static codes store their content directly and do not include scan analytics or destination editing.
+          {" "}<Link to="/dynamic-qr-codes" className="font-medium text-primary underline underline-offset-4">Dynamic URL QR codes</Link>
+          {" "}are a separate account-based trial/premium feature for editable website links and scan analytics, not editable Wi-Fi, contact, text or email content.
+        </p>
       </section>
 
       <nav aria-label="Related QR generators" className="mx-auto mt-12 max-w-5xl px-5">

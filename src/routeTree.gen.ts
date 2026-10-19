@@ -14,7 +14,9 @@ import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/
 import { Route as AdminRouteImport } from './routes/admin'
 import { Route as AuthRouteImport } from './routes/auth'
 import { Route as ContactRouteImport } from './routes/contact'
+import { Route as ContactQrCodeGeneratorRouteImport } from './routes/contact-qr-code-generator'
 import { Route as DynamicQrCodesRouteImport } from './routes/dynamic-qr-codes'
+import { Route as EmailQrCodeGeneratorRouteImport } from './routes/email-qr-code-generator'
 import { Route as PrivacyRouteImport } from './routes/privacy'
 import { Route as RssDotxmlRouteImport } from './routes/rss[.]xml'
 import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
@@ -53,9 +55,19 @@ const ContactRoute = ContactRouteImport.update({
   path: '/contact',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ContactQrCodeGeneratorRoute = ContactQrCodeGeneratorRouteImport.update({
+  id: '/contact-qr-code-generator',
+  path: '/contact-qr-code-generator',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const DynamicQrCodesRoute = DynamicQrCodesRouteImport.update({
   id: '/dynamic-qr-codes',
   path: '/dynamic-qr-codes',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const EmailQrCodeGeneratorRoute = EmailQrCodeGeneratorRouteImport.update({
+  id: '/email-qr-code-generator',
+  path: '/email-qr-code-generator',
   getParentRoute: () => rootRouteImport,
 } as any)
 const PrivacyRoute = PrivacyRouteImport.update({
@@ -129,7 +141,9 @@ export interface FileRoutesByFullPath {
   '/admin': typeof AdminRoute
   '/auth': typeof AuthRoute
   '/contact': typeof ContactRoute
+  '/contact-qr-code-generator': typeof ContactQrCodeGeneratorRoute
   '/dynamic-qr-codes': typeof DynamicQrCodesRoute
+  '/email-qr-code-generator': typeof EmailQrCodeGeneratorRoute
   '/privacy': typeof PrivacyRoute
   '/rss.xml': typeof RssDotxmlRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
@@ -149,7 +163,9 @@ export interface FileRoutesByTo {
   '/admin': typeof AdminRoute
   '/auth': typeof AuthRoute
   '/contact': typeof ContactRoute
+  '/contact-qr-code-generator': typeof ContactQrCodeGeneratorRoute
   '/dynamic-qr-codes': typeof DynamicQrCodesRoute
+  '/email-qr-code-generator': typeof EmailQrCodeGeneratorRoute
   '/privacy': typeof PrivacyRoute
   '/rss.xml': typeof RssDotxmlRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
@@ -171,7 +187,9 @@ export interface FileRoutesById {
   '/admin': typeof AdminRoute
   '/auth': typeof AuthRoute
   '/contact': typeof ContactRoute
+  '/contact-qr-code-generator': typeof ContactQrCodeGeneratorRoute
   '/dynamic-qr-codes': typeof DynamicQrCodesRoute
+  '/email-qr-code-generator': typeof EmailQrCodeGeneratorRoute
   '/privacy': typeof PrivacyRoute
   '/rss.xml': typeof RssDotxmlRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
@@ -193,7 +211,9 @@ export interface FileRouteTypes {
     | '/admin'
     | '/auth'
     | '/contact'
+    | '/contact-qr-code-generator'
     | '/dynamic-qr-codes'
+    | '/email-qr-code-generator'
     | '/privacy'
     | '/rss.xml'
     | '/sitemap.xml'
@@ -213,7 +233,9 @@ export interface FileRouteTypes {
     | '/admin'
     | '/auth'
     | '/contact'
+    | '/contact-qr-code-generator'
     | '/dynamic-qr-codes'
+    | '/email-qr-code-generator'
     | '/privacy'
     | '/rss.xml'
     | '/sitemap.xml'
@@ -234,7 +256,9 @@ export interface FileRouteTypes {
     | '/admin'
     | '/auth'
     | '/contact'
+    | '/contact-qr-code-generator'
     | '/dynamic-qr-codes'
+    | '/email-qr-code-generator'
     | '/privacy'
     | '/rss.xml'
     | '/sitemap.xml'
@@ -256,7 +280,9 @@ export interface RootRouteChildren {
   AdminRoute: typeof AdminRoute
   AuthRoute: typeof AuthRoute
   ContactRoute: typeof ContactRoute
+  ContactQrCodeGeneratorRoute: typeof ContactQrCodeGeneratorRoute
   DynamicQrCodesRoute: typeof DynamicQrCodesRoute
+  EmailQrCodeGeneratorRoute: typeof EmailQrCodeGeneratorRoute
   PrivacyRoute: typeof PrivacyRoute
   RssDotxmlRoute: typeof RssDotxmlRoute
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
@@ -308,11 +334,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ContactRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/contact-qr-code-generator': {
+      id: '/contact-qr-code-generator'
+      path: '/contact-qr-code-generator'
+      fullPath: '/contact-qr-code-generator'
+      preLoaderRoute: typeof ContactQrCodeGeneratorRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/dynamic-qr-codes': {
       id: '/dynamic-qr-codes'
       path: '/dynamic-qr-codes'
       fullPath: '/dynamic-qr-codes'
       preLoaderRoute: typeof DynamicQrCodesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/email-qr-code-generator': {
+      id: '/email-qr-code-generator'
+      path: '/email-qr-code-generator'
+      fullPath: '/email-qr-code-generator'
+      preLoaderRoute: typeof EmailQrCodeGeneratorRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/privacy': {
@@ -426,7 +466,9 @@ const rootRouteChildren: RootRouteChildren = {
   AdminRoute: AdminRoute,
   AuthRoute: AuthRoute,
   ContactRoute: ContactRoute,
+  ContactQrCodeGeneratorRoute: ContactQrCodeGeneratorRoute,
   DynamicQrCodesRoute: DynamicQrCodesRoute,
+  EmailQrCodeGeneratorRoute: EmailQrCodeGeneratorRoute,
   PrivacyRoute: PrivacyRoute,
   RssDotxmlRoute: RssDotxmlRoute,
   SitemapDotxmlRoute: SitemapDotxmlRoute,

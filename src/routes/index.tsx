@@ -1,5 +1,5 @@
 import { Link, createFileRoute } from "@tanstack/react-router";
-import { absoluteUrl } from "@/lib/brand";
+import { BRAND, absoluteUrl } from "@/lib/brand";
 
 import { QrGenerator } from "../components/qr/QrGenerator";
 import { Faq, FAQ_ITEMS } from "../components/sections/Faq";
@@ -27,6 +27,17 @@ export const Route = createFileRoute("/")({
     ],
     links: [{ rel: "canonical", href: absoluteUrl("/") }],
     scripts: [
+      {
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "WebSite",
+          "@id": `${absoluteUrl("/")}#website`,
+          name: BRAND.name,
+          alternateName: "QR Fuse",
+          url: absoluteUrl("/"),
+        }),
+      },
       {
         type: "application/ld+json",
         children: JSON.stringify({

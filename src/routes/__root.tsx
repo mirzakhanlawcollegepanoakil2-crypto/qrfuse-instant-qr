@@ -81,19 +81,9 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: `${BRAND.name} – ${BRAND.tagline}` },
-      {
-        name: "description",
-        content:
-          "Generate QR codes instantly for URLs, text, Wi-Fi, email, phone numbers, and SMS. Fast, free, secure, and mobile-friendly.",
-      },
       { property: "og:type", content: "website" },
       { property: "og:site_name", content: BRAND.name },
       { name: "twitter:card", content: "summary_large_image" },
-      { property: "og:title", content: `${BRAND.name} – ${BRAND.tagline}` },
-      { name: "twitter:title", content: `${BRAND.name} – ${BRAND.tagline}` },
-      { property: "og:description", content: "Generate QR codes instantly for URLs, text, Wi-Fi, email, phone numbers, and SMS. Fast, free, secure, and mobile-friendly." },
-      { name: "twitter:description", content: "Generate QR codes instantly for URLs, text, Wi-Fi, email, phone numbers, and SMS. Fast, free, secure, and mobile-friendly." },
     ],
     links: [
       {
@@ -120,13 +110,11 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
         type: "application/ld+json",
         children: JSON.stringify({
           "@context": "https://schema.org",
-          "@type": "WebApplication",
+          "@type": "Organization",
+          "@id": `${absoluteUrl("/")}#organization`,
           name: BRAND.name,
-          applicationCategory: "UtilitiesApplication",
-          operatingSystem: "Any",
-          description:
-            "Generate QR codes instantly for URLs, text, Wi-Fi, email, phone numbers, and SMS.",
-          offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },
+          url: absoluteUrl("/"),
+          logo: BRAND.logoUrl,
         }),
       },
       // Google Analytics

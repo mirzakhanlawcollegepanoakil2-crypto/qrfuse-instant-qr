@@ -17,11 +17,14 @@ export function Footer() {
           <Link to="/wifi-qr-code-generator" className="text-muted-foreground transition-colors hover:text-primary">
             Wi-Fi QR
           </Link>
-          <Link to="/vcard-qr-code-generator" className="text-muted-foreground transition-colors hover:text-primary">
+          <Link to="/contact-qr-code-generator" className="text-muted-foreground transition-colors hover:text-primary">
             vCard QR
           </Link>
           <Link to="/text-qr-code-generator" className="text-muted-foreground transition-colors hover:text-primary">
             Text QR
+          </Link>
+          <Link to="/email-qr-code-generator" className="text-muted-foreground transition-colors hover:text-primary">
+            Email QR
           </Link>
           <Link to="/dynamic-qr-codes" className="text-muted-foreground transition-colors hover:text-primary">
             Dynamic QR

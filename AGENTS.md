@@ -13,3 +13,4 @@
 - Keep `/vcard-qr-code-generator` as a permanent redirect to `/contact-qr-code-generator` to preserve existing links without duplicate indexed contact content.
 - Public blog lists paginate with stable ordering; sitemap reads use strict failure handling and return 503 instead of caching incomplete URLs.
 - Page-specific search metadata and application schema belong to leaf routes; root metadata contains only shared identity so unrelated pages do not inherit a generator offer.
+- Private account pages receive server-visible X-Robots-Tag headers, not robots crawl blocks, so search engines can read noindex while authentication stays unchanged.

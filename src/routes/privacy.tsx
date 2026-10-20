@@ -11,6 +11,8 @@ export const Route = createFileRoute("/privacy")({
     meta: [
       { title: "Privacy Policy – QRFUSE" },
       { name: "description", content: DESCRIPTION },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
       { property: "og:title", content: "Privacy Policy – QRFUSE" },
       { property: "og:description", content: DESCRIPTION },
       { property: "og:url", content: absoluteUrl("/privacy") },

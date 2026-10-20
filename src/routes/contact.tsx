@@ -10,6 +10,8 @@ export const Route = createFileRoute("/contact")({
     meta: [
       { title: "Contact – QRFUSE" },
       { name: "description", content: DESCRIPTION },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
       { property: "og:title", content: "Contact – QRFUSE" },
       { property: "og:description", content: DESCRIPTION },
       { property: "og:url", content: "https://qrfuse.vercel.app/contact" },

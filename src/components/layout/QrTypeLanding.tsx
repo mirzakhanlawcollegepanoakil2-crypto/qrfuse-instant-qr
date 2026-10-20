@@ -54,7 +54,7 @@ const RELATED = [...QR_TOOLS, { to: "/dynamic-qr-codes", label: "Dynamic QR code
 export function QrTypeLanding({ c }: { c: LandingContent }) {
   return (
     <div className="pb-4">
-      <section className="mx-auto max-w-3xl px-5 pt-14 sm:pt-20">
+      <section className="mx-auto max-w-5xl px-5 pt-14 sm:pt-20">
         <div className="text-center">
           <h1 className="text-4xl font-extrabold tracking-tight text-foreground sm:text-5xl">
             {c.h1}

@@ -14,7 +14,7 @@ export function Field({ label, error, hint, optional, children }: FieldProps) {
 
   return (
     <div className="space-y-2">
-      <label htmlFor={id} className="flex items-center gap-2 text-sm font-medium text-foreground">
+      <label htmlFor={id} className="flex min-h-5 flex-wrap items-center gap-x-2 gap-y-1 text-sm font-medium text-foreground">
         {label}
         {optional ? <span className="text-xs font-normal text-muted-foreground">Optional</span> : null}
       </label>

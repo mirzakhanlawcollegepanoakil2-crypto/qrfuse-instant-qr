@@ -12,6 +12,8 @@ export const Route = createFileRoute("/auth")({
     meta: [
       { title: `Sign in – ${BRAND.name}` },
       { name: "description", content: DESCRIPTION },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
       { property: "og:title", content: `Sign in – ${BRAND.name}` },
       { property: "og:description", content: DESCRIPTION },
       { name: "robots", content: "noindex" },

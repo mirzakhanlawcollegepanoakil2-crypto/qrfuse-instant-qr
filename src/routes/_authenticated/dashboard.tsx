@@ -22,6 +22,10 @@ export const Route = createFileRoute("/_authenticated/dashboard")({
     meta: [
       { title: `Dashboard – ${BRAND.name}` },
       { name: "description", content: "Manage your dynamic QR codes and scan analytics." },
+      { property: "og:title", content: `Dashboard – ${BRAND.name}` },
+      { property: "og:description", content: "Manage your dynamic QR codes and scan analytics." },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
       { name: "robots", content: "noindex, nofollow" },
     ],
   }),

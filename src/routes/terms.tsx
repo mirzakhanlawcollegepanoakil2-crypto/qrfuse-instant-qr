@@ -11,6 +11,8 @@ export const Route = createFileRoute("/terms")({
     meta: [
       { title: "Terms of Use – QRFUSE" },
       { name: "description", content: DESCRIPTION },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
       { property: "og:title", content: "Terms of Use – QRFUSE" },
       { property: "og:description", content: DESCRIPTION },
       { property: "og:url", content: absoluteUrl("/terms") },

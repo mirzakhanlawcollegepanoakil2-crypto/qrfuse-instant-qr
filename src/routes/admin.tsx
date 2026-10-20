@@ -10,6 +10,10 @@ export const Route = createFileRoute("/admin")({
     meta: [
       { title: "Admin | QRFUSE" },
       { name: "description", content: "Private QRFUSE administration area." },
+      { property: "og:title", content: "Admin | QRFUSE" },
+      { property: "og:description", content: "Private QRFUSE administration area." },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
       { name: "robots", content: "noindex, nofollow" },
     ],
   }),

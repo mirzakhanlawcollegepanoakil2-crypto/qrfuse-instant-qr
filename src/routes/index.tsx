@@ -9,9 +9,7 @@ import { QrTools } from "../components/sections/QrTools";
 
 const TITLE = "Free QR Code Generator — Static & Dynamic QR | QRFUSE";
 const DESCRIPTION =
-  "Create free static QR codes for links, Wi-Fi, contacts, text and more — no sign-up. Customize colors and logos, download PNG, SVG or PDF, or try editable dynamic QR codes with scan analytics.";
-const OG_IMAGE =
-  "https://storage.googleapis.com/gpt-engineer-file-uploads/lENX7TPKF3YtwcBEBseO9J9yxlM2/social-images/social-1785081350094-1000090114.webp";
+  "Create free QR codes for URLs, Wi-Fi, contacts, text and email. Customize and download PNG, SVG or PDF without an account. Dynamic QR codes require a trial or plan.";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -23,13 +21,25 @@ export const Route = createFileRoute("/")({
       { property: "og:title", content: TITLE },
       { property: "og:description", content: DESCRIPTION },
       { property: "og:url", content: absoluteUrl("/") },
-      { property: "og:image", content: OG_IMAGE },
-      { name: "twitter:image", content: OG_IMAGE },
       { name: "twitter:title", content: TITLE },
       { name: "twitter:description", content: DESCRIPTION },
     ],
     links: [{ rel: "canonical", href: absoluteUrl("/") }],
     scripts: [
+      {
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "WebApplication",
+          "@id": `${absoluteUrl("/")}#generator`,
+          name: `${BRAND.name} Free Static QR Code Generator`,
+          url: absoluteUrl("/"),
+          applicationCategory: "UtilitiesApplication",
+          operatingSystem: "Any",
+          description: "Create and download free static QR codes in your browser. No account required.",
+          offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },
+        }),
+      },
       {
         type: "application/ld+json",
         children: JSON.stringify({
@@ -68,7 +78,8 @@ function Index() {
           </h1>
           <p className="mx-auto mt-4 max-w-2xl text-base leading-relaxed text-muted-foreground sm:text-lg">
             Generate QR codes instantly for websites, text, Wi-Fi, email, phone numbers, SMS, and
-            more. No signup required.
+            more. Static QR codes are free with no account required. Dynamic QR codes need an
+            account and an active trial or plan.
           </p>
           <div className="mt-8 flex flex-wrap justify-center gap-3">
             <a

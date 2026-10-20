@@ -136,11 +136,12 @@ function BlogPostPage() {
         <div className="prose prose-sm dark:prose-invert max-w-none">
           {post.content.split("\n").map((paragraph: string, index: number) => {
             if (paragraph.startsWith('#')) {
-              const level = paragraph.match(/^#+/)![0].length;
+              const level = paragraph.match(/^#+/)?.[0].length ?? 1;
               const text = paragraph.replace(/^#+\s/, '');
+              if (level === 1 && text.trim() === post.title.trim()) return null;
               const Component = (
-                ['h1', 'h2', 'h3', 'h4', 'h5', 'h6'] as const
-              )[Math.min(level - 1, 5)];
+                ['h2', 'h3', 'h4', 'h5', 'h6'] as const
+              )[Math.max(0, Math.min(level - 2, 4))];
               return (
                 <Component key={index} className="mt-6 mb-3 font-bold">
                   {text}

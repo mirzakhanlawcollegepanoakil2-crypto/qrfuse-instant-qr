@@ -37,7 +37,7 @@ function generateSitemapXml(posts: BlogPost[]) {
   const urls = [...staticPages, ...blogEntries].map((e) =>
     [
       `  <url>`,
-      `    <loc>${SITE_URL}${e.path}</loc>`,
+      `    <loc>${`${SITE_URL}${e.path}`.replace(/[&<>"']/g, (char) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&apos;" })[char] ?? char)}</loc>`,
       e.lastmod ? `    <lastmod>${e.lastmod}</lastmod>` : null,
       `    <changefreq>${e.changefreq}</changefreq>`,
       `    <priority>${e.priority}</priority>`,
@@ -59,13 +59,20 @@ export const Route = createFileRoute("/sitemap.xml")({
   server: {
     handlers: {
       GET: async () => {
-        const { listPublishedPosts } = await import("@/lib/blog-public.server");
-        return new Response(generateSitemapXml(await listPublishedPosts()), {
-          headers: {
-            "Content-Type": "application/xml",
-            "Cache-Control": "public, max-age=300",
-          },
-        });
+        try {
+          const { listPublishedPosts } = await import("@/lib/blog-public.server");
+          return new Response(generateSitemapXml(await listPublishedPosts({ strict: true })), {
+            headers: {
+              "Content-Type": "application/xml; charset=utf-8",
+              "Cache-Control": "public, max-age=300",
+            },
+          });
+        } catch {
+          return new Response("Sitemap temporarily unavailable. Please retry later.", {
+            status: 503,
+            headers: { "Cache-Control": "no-store", "Retry-After": "300" },
+          });
+        }
       },
     },
   },

@@ -2,12 +2,15 @@ import { createClient } from "@supabase/supabase-js";
 
 import type { Database } from "@/integrations/supabase/types";
 import { BLOG_POSTS, type BlogPost } from "./blog";
+import { PUBLIC_BACKEND_KEY, PUBLIC_BACKEND_URL } from "./public-backend-config";
+import { collectPages } from "./pagination";
 
 type PostRow = Database["public"]["Tables"]["blog_posts"]["Row"];
 
 function publicClient() {
-  const key = process.env.SUPABASE_PUBLISHABLE_KEY!;
-  return createClient<Database>(process.env.SUPABASE_URL!, key, {
+  const key = process.env.SUPABASE_PUBLISHABLE_KEY || PUBLIC_BACKEND_KEY;
+  const url = process.env.SUPABASE_URL || PUBLIC_BACKEND_URL;
+  return createClient<Database>(url, key, {
     auth: { persistSession: false, autoRefreshToken: false, storage: undefined },
     global: {
       fetch: (input, init) => {
@@ -43,18 +46,25 @@ function sortByDate(posts: BlogPost[]): BlogPost[] {
 }
 
 /** Published posts from the CMS, merged with the built-in starter articles. */
-export async function listPublishedPosts(): Promise<BlogPost[]> {
+export async function listPublishedPosts(options: { strict?: boolean } = {}): Promise<BlogPost[]> {
   try {
-    const { data, error } = await publicClient()
-      .from("blog_posts")
-      .select("*")
-      .eq("published", true)
-      .order("published_at", { ascending: false });
-    if (error) throw error;
-    const dbPosts = (data ?? []).map(rowToPost);
+    const client = publicClient();
+    const rows = await collectPages<PostRow>(async (from, to) => {
+      const { data, error } = await client
+        .from("blog_posts")
+        .select("*")
+        .eq("published", true)
+        .order("published_at", { ascending: false })
+        .order("id", { ascending: true })
+        .range(from, to);
+      if (error) throw error;
+      return data ?? [];
+    });
+    const dbPosts = rows.map(rowToPost);
     const slugs = new Set(dbPosts.map((p) => p.slug));
     return sortByDate([...dbPosts, ...BLOG_POSTS.filter((p) => !slugs.has(p.slug))]);
-  } catch {
+  } catch (error) {
+    if (options.strict) throw error;
     return sortByDate(BLOG_POSTS);
   }
 }

@@ -1,4 +1,5 @@
-import { describe, expect, test } from "bun:test";
+import { describe, test } from "node:test";
+import assert from "node:assert/strict";
 import { buildPayload, emptyForm, isComplete, type QrType } from "./qr-types";
 
 describe("dedicated static generator payloads", () => {
@@ -13,8 +14,8 @@ describe("dedicated static generator payloads", () => {
   for (const example of cases) {
     test(`${example.type} encodes the supplied static content`, () => {
       const form = { ...emptyForm, ...example.fields };
-      expect(isComplete(example.type, form)).toBe(true);
-      expect(buildPayload(example.type, form)).toEqual({ ok: true, value: example.value });
+      assert.equal(isComplete(example.type, form), true);
+      assert.deepEqual(buildPayload(example.type, form), { ok: true, value: example.value });
     });
   }
 });

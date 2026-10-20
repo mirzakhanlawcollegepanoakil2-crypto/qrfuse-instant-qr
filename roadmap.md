@@ -4,6 +4,6 @@
 - [x] Verify direct visits, refreshes, metadata, exports, decoded payloads, and mobile layouts.
 
 # Google SEO and crawl access
-- [ ] Audit public metadata, live crawl access, and Search Console availability.
-- [ ] Correct search metadata and sitemap reliability without changing private access.
-- [ ] Verify crawlable HTML, sitemap entries, and existing QR generation.
+- [x] Audit public metadata, live crawl access, and Search Console availability (no connected account; Google index history unverified).
+- [x] Correct search metadata and sitemap reliability without changing private access.
+- [x] Verify crawlable HTML, sitemap entries, and existing QR generation.

@@ -9,6 +9,8 @@ export interface BlogPost {
   description: string;
   content: string;
   date: string; // ISO format: YYYY-MM-DD
+  /** Last significant content update (YYYY-MM-DD); CMS posts only. */
+  updatedAt?: string;
   category: string;
   image: string;
   imageAlt: string;

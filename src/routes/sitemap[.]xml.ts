@@ -31,7 +31,8 @@ function generateSitemapXml(posts: BlogPost[]) {
     path: `/blog/${post.slug}`,
     changefreq: "monthly",
     priority: "0.8",
-    lastmod: post.date,
+    // Prefer the CMS's last content update over the publish date.
+    lastmod: post.updatedAt ?? post.date,
   }));
 
   const urls = [...staticPages, ...blogEntries].map((e) =>

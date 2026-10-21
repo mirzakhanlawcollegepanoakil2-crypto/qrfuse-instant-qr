@@ -17,19 +17,6 @@ export const Route = createFileRoute("/contact")({
       { property: "og:url", content: "https://qrfuse.vercel.app/contact" },
     ],
     links: [{ rel: "canonical", href: "https://qrfuse.vercel.app/contact" }],
-    scripts: [
-      {
-        async: true,
-        src: "https://www.googletagmanager.com/gtag/js?id=G-F23SZRV217",
-      },
-      {
-        children: `window.dataLayer = window.dataLayer || [];
-function gtag(){dataLayer.push(arguments);}
-gtag('js', new Date());
-
-gtag('config', 'G-F23SZRV217');`,
-      },
-    ],
   }),
   component: ContactPage,
 });

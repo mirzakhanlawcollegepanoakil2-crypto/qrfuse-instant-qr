@@ -113,8 +113,10 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
           "@type": "Organization",
           "@id": `${absoluteUrl("/")}#organization`,
           name: BRAND.name,
+          alternateName: "QR Fuse",
           url: absoluteUrl("/"),
           logo: BRAND.logoUrl,
+          description: BRAND.description,
         }),
       },
       // Google Analytics

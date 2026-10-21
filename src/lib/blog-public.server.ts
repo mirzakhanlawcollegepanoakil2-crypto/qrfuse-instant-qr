@@ -32,6 +32,7 @@ export function rowToPost(row: PostRow): BlogPost {
     description: row.description,
     content: row.content,
     date: (row.published_at ?? row.created_at).slice(0, 10),
+    updatedAt: row.updated_at.slice(0, 10),
     category: row.category,
     image: row.image_url,
     imageAlt: row.image_alt || row.title,

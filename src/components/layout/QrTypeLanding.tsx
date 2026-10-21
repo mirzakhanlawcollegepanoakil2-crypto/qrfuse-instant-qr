@@ -45,6 +45,20 @@ export function landingHead(c: LandingContent) {
           ],
         }),
       },
+      {
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "HowTo",
+          name: c.h1,
+          description: c.intro,
+          step: c.steps.map((text, i) => ({
+            "@type": "HowToStep",
+            position: i + 1,
+            text,
+          })),
+        }),
+      },
     ],
   };
 }

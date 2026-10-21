@@ -77,6 +77,7 @@ export const Route = createFileRoute("/blog/$slug")({
               imageAlt: post.imageAlt,
               author: post.author,
               publishedDate: post.date,
+              updatedDate: post.updatedAt,
             })
           ),
         },

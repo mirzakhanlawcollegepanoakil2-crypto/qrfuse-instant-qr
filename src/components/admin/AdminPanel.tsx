@@ -355,6 +355,7 @@ function PostsManager({ onError }: { onError: (message: string) => void }) {
     setBusy(true);
     try {
       await savePost({ data: draft });
+      onError("");
       setDraft(null);
       load();
     } catch (err) {

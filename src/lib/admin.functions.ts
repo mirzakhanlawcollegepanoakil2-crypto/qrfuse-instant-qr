@@ -8,6 +8,11 @@ import {
   type PostInput,
 } from "./admin.server";
 
+function friendlyDbError(error: { code?: string; message: string }): string {
+  if (error.code === "23505") return "Another post already uses this slug. Choose a different slug.";
+  return error.message;
+}
+
 export const checkAdminAccess = createServerFn({ method: "GET" })
   .middleware([requireVercelCompatibleAuth])
   .handler(async ({ context }) => {
@@ -58,8 +63,13 @@ export const savePost = createServerFn({ method: "POST" })
       if (existing.data?.published && fields.published) {
         payload.published_at = existing.data.published_at;
       }
-      const { error } = await context.supabase.from("blog_posts").update(payload).eq("id", id);
-      if (error) throw new Error(error.message);
+      const { data: updated, error } = await context.supabase
+        .from("blog_posts")
+        .update(payload)
+        .eq("id", id)
+        .select("id");
+      if (error) throw new Error(friendlyDbError(error));
+      if (!updated?.length) throw new Error("Post not found or not saved. Refresh and try again.");
       return { id };
     }
 
@@ -68,7 +78,7 @@ export const savePost = createServerFn({ method: "POST" })
       .insert(payload)
       .select("id")
       .single();
-    if (error) throw new Error(error.message);
+    if (error) throw new Error(friendlyDbError(error));
     return { id: inserted.id };
   });
 

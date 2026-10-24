@@ -15,6 +15,16 @@ export const FAQ_ITEMS = [
       "Yes. The QR codes you create are yours to use in products, packaging, print and marketing without attribution.",
   },
   {
+    question: "Are QR codes free to create?",
+    answer:
+      "Yes. QRFUSE's static QR generator — including custom colors, logos and styles — is completely free with no account and no watermarks. Dynamic QR codes with editable links and scan analytics are a separate feature that needs an active trial or plan.",
+  },
+  {
+    question: "Can you edit a QR code after printing?",
+    answer:
+      "A static QR code can't be edited — generate a new one when your content changes. A dynamic QR code can: it encodes a short link you control, so you can change the destination after printing on an active trial or plan.",
+  },
+  {
     question: "Do QR codes expire?",
     answer:
       "No. QRFUSE creates static QR codes that encode your content directly, so they keep working forever.",

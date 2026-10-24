@@ -15,11 +15,15 @@ import { Route as AdminRouteImport } from './routes/admin'
 import { Route as AuthRouteImport } from './routes/auth'
 import { Route as ContactRouteImport } from './routes/contact'
 import { Route as ContactQrCodeGeneratorRouteImport } from './routes/contact-qr-code-generator'
+import { Route as CustomQrCodeGeneratorRouteImport } from './routes/custom-qr-code-generator'
 import { Route as DynamicQrCodesRouteImport } from './routes/dynamic-qr-codes'
 import { Route as EmailQrCodeGeneratorRouteImport } from './routes/email-qr-code-generator'
+import { Route as LocationQrCodeGeneratorRouteImport } from './routes/location-qr-code-generator'
 import { Route as PrivacyRouteImport } from './routes/privacy'
 import { Route as RssDotxmlRouteImport } from './routes/rss[.]xml'
 import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
+import { Route as SmsQrCodeGeneratorRouteImport } from './routes/sms-qr-code-generator'
+import { Route as SocialQrCodeGeneratorRouteImport } from './routes/social-qr-code-generator'
 import { Route as TermsRouteImport } from './routes/terms'
 import { Route as TextQrCodeGeneratorRouteImport } from './routes/text-qr-code-generator'
 import { Route as UrlQrCodeGeneratorRouteImport } from './routes/url-qr-code-generator'
@@ -60,6 +64,11 @@ const ContactQrCodeGeneratorRoute = ContactQrCodeGeneratorRouteImport.update({
   path: '/contact-qr-code-generator',
   getParentRoute: () => rootRouteImport,
 } as any)
+const CustomQrCodeGeneratorRoute = CustomQrCodeGeneratorRouteImport.update({
+  id: '/custom-qr-code-generator',
+  path: '/custom-qr-code-generator',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const DynamicQrCodesRoute = DynamicQrCodesRouteImport.update({
   id: '/dynamic-qr-codes',
   path: '/dynamic-qr-codes',
@@ -68,6 +77,11 @@ const DynamicQrCodesRoute = DynamicQrCodesRouteImport.update({
 const EmailQrCodeGeneratorRoute = EmailQrCodeGeneratorRouteImport.update({
   id: '/email-qr-code-generator',
   path: '/email-qr-code-generator',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const LocationQrCodeGeneratorRoute = LocationQrCodeGeneratorRouteImport.update({
+  id: '/location-qr-code-generator',
+  path: '/location-qr-code-generator',
   getParentRoute: () => rootRouteImport,
 } as any)
 const PrivacyRoute = PrivacyRouteImport.update({
@@ -83,6 +97,16 @@ const RssDotxmlRoute = RssDotxmlRouteImport.update({
 const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
   id: '/sitemap.xml',
   path: '/sitemap.xml',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SmsQrCodeGeneratorRoute = SmsQrCodeGeneratorRouteImport.update({
+  id: '/sms-qr-code-generator',
+  path: '/sms-qr-code-generator',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SocialQrCodeGeneratorRoute = SocialQrCodeGeneratorRouteImport.update({
+  id: '/social-qr-code-generator',
+  path: '/social-qr-code-generator',
   getParentRoute: () => rootRouteImport,
 } as any)
 const TermsRoute = TermsRouteImport.update({
@@ -142,11 +166,15 @@ export interface FileRoutesByFullPath {
   '/auth': typeof AuthRoute
   '/contact': typeof ContactRoute
   '/contact-qr-code-generator': typeof ContactQrCodeGeneratorRoute
+  '/custom-qr-code-generator': typeof CustomQrCodeGeneratorRoute
   '/dynamic-qr-codes': typeof DynamicQrCodesRoute
   '/email-qr-code-generator': typeof EmailQrCodeGeneratorRoute
+  '/location-qr-code-generator': typeof LocationQrCodeGeneratorRoute
   '/privacy': typeof PrivacyRoute
   '/rss.xml': typeof RssDotxmlRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/sms-qr-code-generator': typeof SmsQrCodeGeneratorRoute
+  '/social-qr-code-generator': typeof SocialQrCodeGeneratorRoute
   '/terms': typeof TermsRoute
   '/text-qr-code-generator': typeof TextQrCodeGeneratorRoute
   '/url-qr-code-generator': typeof UrlQrCodeGeneratorRoute
@@ -164,11 +192,15 @@ export interface FileRoutesByTo {
   '/auth': typeof AuthRoute
   '/contact': typeof ContactRoute
   '/contact-qr-code-generator': typeof ContactQrCodeGeneratorRoute
+  '/custom-qr-code-generator': typeof CustomQrCodeGeneratorRoute
   '/dynamic-qr-codes': typeof DynamicQrCodesRoute
   '/email-qr-code-generator': typeof EmailQrCodeGeneratorRoute
+  '/location-qr-code-generator': typeof LocationQrCodeGeneratorRoute
   '/privacy': typeof PrivacyRoute
   '/rss.xml': typeof RssDotxmlRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/sms-qr-code-generator': typeof SmsQrCodeGeneratorRoute
+  '/social-qr-code-generator': typeof SocialQrCodeGeneratorRoute
   '/terms': typeof TermsRoute
   '/text-qr-code-generator': typeof TextQrCodeGeneratorRoute
   '/url-qr-code-generator': typeof UrlQrCodeGeneratorRoute
@@ -188,11 +220,15 @@ export interface FileRoutesById {
   '/auth': typeof AuthRoute
   '/contact': typeof ContactRoute
   '/contact-qr-code-generator': typeof ContactQrCodeGeneratorRoute
+  '/custom-qr-code-generator': typeof CustomQrCodeGeneratorRoute
   '/dynamic-qr-codes': typeof DynamicQrCodesRoute
   '/email-qr-code-generator': typeof EmailQrCodeGeneratorRoute
+  '/location-qr-code-generator': typeof LocationQrCodeGeneratorRoute
   '/privacy': typeof PrivacyRoute
   '/rss.xml': typeof RssDotxmlRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/sms-qr-code-generator': typeof SmsQrCodeGeneratorRoute
+  '/social-qr-code-generator': typeof SocialQrCodeGeneratorRoute
   '/terms': typeof TermsRoute
   '/text-qr-code-generator': typeof TextQrCodeGeneratorRoute
   '/url-qr-code-generator': typeof UrlQrCodeGeneratorRoute
@@ -212,11 +248,15 @@ export interface FileRouteTypes {
     | '/auth'
     | '/contact'
     | '/contact-qr-code-generator'
+    | '/custom-qr-code-generator'
     | '/dynamic-qr-codes'
     | '/email-qr-code-generator'
+    | '/location-qr-code-generator'
     | '/privacy'
     | '/rss.xml'
     | '/sitemap.xml'
+    | '/sms-qr-code-generator'
+    | '/social-qr-code-generator'
     | '/terms'
     | '/text-qr-code-generator'
     | '/url-qr-code-generator'
@@ -234,11 +274,15 @@ export interface FileRouteTypes {
     | '/auth'
     | '/contact'
     | '/contact-qr-code-generator'
+    | '/custom-qr-code-generator'
     | '/dynamic-qr-codes'
     | '/email-qr-code-generator'
+    | '/location-qr-code-generator'
     | '/privacy'
     | '/rss.xml'
     | '/sitemap.xml'
+    | '/sms-qr-code-generator'
+    | '/social-qr-code-generator'
     | '/terms'
     | '/text-qr-code-generator'
     | '/url-qr-code-generator'
@@ -257,11 +301,15 @@ export interface FileRouteTypes {
     | '/auth'
     | '/contact'
     | '/contact-qr-code-generator'
+    | '/custom-qr-code-generator'
     | '/dynamic-qr-codes'
     | '/email-qr-code-generator'
+    | '/location-qr-code-generator'
     | '/privacy'
     | '/rss.xml'
     | '/sitemap.xml'
+    | '/sms-qr-code-generator'
+    | '/social-qr-code-generator'
     | '/terms'
     | '/text-qr-code-generator'
     | '/url-qr-code-generator'
@@ -281,11 +329,15 @@ export interface RootRouteChildren {
   AuthRoute: typeof AuthRoute
   ContactRoute: typeof ContactRoute
   ContactQrCodeGeneratorRoute: typeof ContactQrCodeGeneratorRoute
+  CustomQrCodeGeneratorRoute: typeof CustomQrCodeGeneratorRoute
   DynamicQrCodesRoute: typeof DynamicQrCodesRoute
   EmailQrCodeGeneratorRoute: typeof EmailQrCodeGeneratorRoute
+  LocationQrCodeGeneratorRoute: typeof LocationQrCodeGeneratorRoute
   PrivacyRoute: typeof PrivacyRoute
   RssDotxmlRoute: typeof RssDotxmlRoute
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
+  SmsQrCodeGeneratorRoute: typeof SmsQrCodeGeneratorRoute
+  SocialQrCodeGeneratorRoute: typeof SocialQrCodeGeneratorRoute
   TermsRoute: typeof TermsRoute
   TextQrCodeGeneratorRoute: typeof TextQrCodeGeneratorRoute
   UrlQrCodeGeneratorRoute: typeof UrlQrCodeGeneratorRoute
@@ -341,6 +393,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ContactQrCodeGeneratorRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/custom-qr-code-generator': {
+      id: '/custom-qr-code-generator'
+      path: '/custom-qr-code-generator'
+      fullPath: '/custom-qr-code-generator'
+      preLoaderRoute: typeof CustomQrCodeGeneratorRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/dynamic-qr-codes': {
       id: '/dynamic-qr-codes'
       path: '/dynamic-qr-codes'
@@ -353,6 +412,13 @@ declare module '@tanstack/react-router' {
       path: '/email-qr-code-generator'
       fullPath: '/email-qr-code-generator'
       preLoaderRoute: typeof EmailQrCodeGeneratorRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/location-qr-code-generator': {
+      id: '/location-qr-code-generator'
+      path: '/location-qr-code-generator'
+      fullPath: '/location-qr-code-generator'
+      preLoaderRoute: typeof LocationQrCodeGeneratorRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/privacy': {
@@ -374,6 +440,20 @@ declare module '@tanstack/react-router' {
       path: '/sitemap.xml'
       fullPath: '/sitemap.xml'
       preLoaderRoute: typeof SitemapDotxmlRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/sms-qr-code-generator': {
+      id: '/sms-qr-code-generator'
+      path: '/sms-qr-code-generator'
+      fullPath: '/sms-qr-code-generator'
+      preLoaderRoute: typeof SmsQrCodeGeneratorRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/social-qr-code-generator': {
+      id: '/social-qr-code-generator'
+      path: '/social-qr-code-generator'
+      fullPath: '/social-qr-code-generator'
+      preLoaderRoute: typeof SocialQrCodeGeneratorRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/terms': {
@@ -467,11 +547,15 @@ const rootRouteChildren: RootRouteChildren = {
   AuthRoute: AuthRoute,
   ContactRoute: ContactRoute,
   ContactQrCodeGeneratorRoute: ContactQrCodeGeneratorRoute,
+  CustomQrCodeGeneratorRoute: CustomQrCodeGeneratorRoute,
   DynamicQrCodesRoute: DynamicQrCodesRoute,
   EmailQrCodeGeneratorRoute: EmailQrCodeGeneratorRoute,
+  LocationQrCodeGeneratorRoute: LocationQrCodeGeneratorRoute,
   PrivacyRoute: PrivacyRoute,
   RssDotxmlRoute: RssDotxmlRoute,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
+  SmsQrCodeGeneratorRoute: SmsQrCodeGeneratorRoute,
+  SocialQrCodeGeneratorRoute: SocialQrCodeGeneratorRoute,
   TermsRoute: TermsRoute,
   TextQrCodeGeneratorRoute: TextQrCodeGeneratorRoute,
   UrlQrCodeGeneratorRoute: UrlQrCodeGeneratorRoute,

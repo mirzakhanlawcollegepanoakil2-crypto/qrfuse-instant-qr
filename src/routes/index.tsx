@@ -9,7 +9,7 @@ import { QrTools } from "../components/sections/QrTools";
 
 const TITLE = "Free QR Code Generator — Static & Dynamic QR | QRFUSE";
 const DESCRIPTION =
-  "Create free QR codes for URLs, Wi-Fi, contacts, text and email. Customize and download PNG, SVG or PDF without an account. Dynamic QR codes require a trial or plan.";
+  "Create free QR codes for URLs, Wi-Fi, contacts, text and email. A free online QR code maker with custom colors, logos and PNG, SVG or PDF downloads. Dynamic QR codes require a trial or plan.";
 
 export const Route = createFileRoute("/")({
   head: () => ({

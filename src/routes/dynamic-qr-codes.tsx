@@ -3,9 +3,9 @@ import { Link, createFileRoute } from "@tanstack/react-router";
 import { StaticVsDynamic } from "@/components/sections/StaticVsDynamic";
 import { BRAND, absoluteUrl } from "@/lib/brand";
 
-const TITLE = `Dynamic QR Codes with Editable Links – ${BRAND.name}`;
+const TITLE = `Dynamic QR Code Generator — Editable & Trackable QR Codes | ${BRAND.name}`;
 const DESCRIPTION =
-  "Create dynamic QR codes you can edit after printing. Change the destination URL any time, pause codes, and track scans with privacy-friendly analytics.";
+  "Create dynamic QR codes you can edit after printing. Change the destination URL any time, pause codes, and track scans with privacy-friendly analytics. Static codes stay free.";
 
 export const Route = createFileRoute("/dynamic-qr-codes")({
   head: () => ({
@@ -83,6 +83,37 @@ function DynamicQrPage() {
         </ol>
       </section>
 
+      <section aria-labelledby="dyn-faq-heading" className="mx-auto mt-20 max-w-3xl px-5">
+        <h2 id="dyn-faq-heading" className="text-2xl font-bold tracking-tight text-foreground">
+          Dynamic QR code questions
+        </h2>
+        <dl className="mt-6 divide-y divide-border">
+          <div className="py-5">
+            <dt className="font-semibold text-foreground">Do QR codes expire?</dt>
+            <dd className="mt-2 text-sm leading-relaxed text-muted-foreground">
+              Static QR codes never expire — the content is stored inside the code itself. Dynamic codes keep working as long as the QRFUSE link is active on your account's trial or plan, so keep it active for anything already printed.
+            </dd>
+          </div>
+          <div className="py-5">
+            <dt className="font-semibold text-foreground">Can you edit a QR code after printing?</dt>
+            <dd className="mt-2 text-sm leading-relaxed text-muted-foreground">
+              Not a static one — its content is fixed at creation. A dynamic QR code can be edited: the printed artwork encodes a short QRFUSE link, and you change where that link points without reprinting.
+            </dd>
+          </div>
+          <div className="py-5">
+            <dt className="font-semibold text-foreground">What scan analytics do dynamic codes include?</dt>
+            <dd className="mt-2 text-sm leading-relaxed text-muted-foreground">
+              Total scans, scans today and over the last 7 or 30 days, a 30-day timeline, and device and country breakdowns where available. Scans are counted without storing raw IP addresses.
+            </dd>
+          </div>
+          <div className="py-5">
+            <dt className="font-semibold text-foreground">Static vs dynamic QR codes — which should I use?</dt>
+            <dd className="mt-2 text-sm leading-relaxed text-muted-foreground">
+              Use a static code when the content will never change: it is free forever and works offline. Use a dynamic code when you may need to repoint a printed link, pause a campaign, or measure scans.
+            </dd>
+          </div>
+        </dl>
+      </section>
       <StaticVsDynamic />
     </div>
   );

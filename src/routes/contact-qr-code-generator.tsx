@@ -4,8 +4,8 @@ import { QrTypeLanding, landingHead, type LandingContent } from "@/components/la
 const C: LandingContent = {
   path: "/contact-qr-code-generator",
   type: "vcard",
-  title: "Free Contact QR Code Generator — vCard Creator | QRFUSE",
-  description: "Create a free contact QR code with your name, phone, email and company. Share a vCard on business cards or badges and download PNG, SVG or PDF.",
+  title: "Free Contact QR Code Generator — vCard QR Creator | QRFUSE",
+  description: "Create a free contact QR code with your name, phone, email and company. A vCard QR code generator for business cards and event badges — download PNG, SVG or PDF.",
   h1: "Contact QR Code Generator",
   intro: "Share your contact details as a vCard QR code. Compatible scanners let recipients review and save your details without typing them out.",
   steps: [
